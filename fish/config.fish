@@ -4,9 +4,11 @@
 eval sh ~/dotfiles/shell/base16-ocean.dark.sh
 
 # start tmux if exists, not in desktop environment, and not already running.
-if command --search tmux > /dev/null and test -z (echo $DESKTOP_SESSION)
-  if test -z (echo $TMUX)
-    tmux
+if command --search tmux > /dev/null
+  if test -z (echo $DESKTOP_SESSION)
+    if test -z (echo $TMUX)
+      tmux
+    end
   end
 end
 
