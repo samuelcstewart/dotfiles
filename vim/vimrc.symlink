@@ -29,14 +29,14 @@ Plugin 'rodjek/vim-puppet'
 Plugin 'othree/html5.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'jonathanfilip/vim-lucius'
+Plugin 'romainl/Apprentice'
 
 call vundle#end()
 
 " Colours
 set background=dark
 syntax on
-colorscheme lucius
+colorscheme apprentice
 
 " Behave with windows copy/paste. Use Ctrl+Q to enter into visual block mode.
 if has("win32")
