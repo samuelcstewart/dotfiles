@@ -1,6 +1,11 @@
 "allow Use sensible settings ( iMproved )
 set nocompatible
 
+" when using fish, tell vim to use sh.
+if &shell =~# 'fish$'
+  set shell=sh
+endif
+
 " Load plugins and indentation for file types
 filetype plugin indent on
 

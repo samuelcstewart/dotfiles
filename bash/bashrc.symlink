@@ -4,9 +4,9 @@
 [[ $- != *i* ]] && return
 
 # if fish available, use it.
-#if type fish &>/dev/null; then
-#  exec fish
-#fi
+if type fish &>/dev/null; then
+  exec fish
+fi
 
 # if has tmux, not desktop session, and not already running, start it
 if type tmux &>/dev/null && [[ -z "$DESKTOP_SESSION" ]]; then
