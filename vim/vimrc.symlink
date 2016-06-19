@@ -21,7 +21,6 @@ endif
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'gmarik/Vundle.vim'
-Plugin 'chriskempson/base16-vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
@@ -30,14 +29,14 @@ Plugin 'rodjek/vim-puppet'
 Plugin 'othree/html5.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'jonathanfilip/vim-lucius'
 
 call vundle#end()
 
 " Colours
-let base16colorspace=256
 set background=dark
 syntax on
-colorscheme base16-ocean
+colorscheme lucius
 
 " Behave with windows copy/paste. Use Ctrl+Q to enter into visual block mode.
 if has("win32")

@@ -37,8 +37,8 @@ set -o vi
 source $HOME/dotfiles/bash/bash_aliases
 
 # Base16 Shell
-BASE16_SHELL="$HOME/dotfiles/shell/base16-ocean.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+#BASE16_SHELL="$HOME/dotfiles/shell/base16-ocean.dark.sh"
+#[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # Prompt
 export GIT_PS1_SHOWDIRTYSTATE=1
