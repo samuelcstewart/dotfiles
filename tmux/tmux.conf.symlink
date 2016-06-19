@@ -1,0 +1,95 @@
+# Themed using shell colours from base16.
+# https://github.com/chriskempson/base16-shell
+
+# Remap prefix to Ctrl A
+unbind C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix
+
+# Set fish as default shell
+#set-option -g default-shell /usr/bin/fish
+
+# Easy reloads
+bind r source-file ~/.tmux.conf
+
+# Use vi keybindings for tmux commandline input.
+set -g status-keys vi
+
+# Use vi keybindings in copy and choice modes
+setw -g mode-keys vi
+
+# Start windows and panes at index 1
+set -g base-index 1
+set -g pane-base-index 1
+
+# Disable mouse control
+set -g mouse off
+
+# Mouse options < 2.1
+#set -g mode-mouse on
+#set -g mouse-select-window on
+#set -g mouse-select-pane on
+#set -g mouse-resize-pane on
+
+# Vim-like navigation bindings
+unbind-key j
+bind-key j select-pane -D
+unbind-key k
+bind-key k select-pane -U
+unbind-key h
+bind-key h select-pane -L
+unbind-key l
+bind-key l select-pane -R
+
+# Terminal type
+set -g default-terminal "screen-256color"
+
+### Design changes
+
+# Current window tab styling
+setw -g window-status-current-format ' #I#[fg=colour19]:#[fg=colour20]#W#[fg=colour20]#F '
+setw -g window-status-current-fg colour3
+setw -g window-status-current-bg colour0
+setw -g window-status-current-attr bold
+
+# Deselected window tab styling
+setw -g window-status-format ' #I#[fg=colour19]:#[fg=colour20]#W#[fg=colour20]#F '
+setw -g window-status-fg colour17
+setw -g window-status-bg colour18
+setw -g window-status-attr none
+
+# Turn off all the bells
+set-option -g visual-activity off
+set-option -g visual-bell off
+set-option -g visual-silence off
+set-window-option -g monitor-activity off
+set-option -g bell-action none
+
+# Big clock colour ( Escape + T )
+setw -g clock-mode-colour colour1
+
+# Mode attribute indicator ( appears top right in copy mode )
+setw -g mode-attr bold
+setw -g mode-fg colour1
+setw -g mode-bg colour0
+
+# Panes
+set -g pane-border-bg colour18
+set -g pane-border-fg colour19
+set -g pane-active-border-bg colour18
+set -g pane-active-border-fg colour17
+
+# Status bar
+set -g status-utf8 on
+set -g status-position bottom
+set -g status-bg colour18
+set -g status-fg colour20
+set -g status-left ''
+set -g status-justify left
+set -g status-interval 2
+set -g status-right '#[fg=colour7]#S#[fg=colour8]::#[fg=colour7]#H'
+
+# Messages
+set -g message-attr bold
+set -g message-fg colour20
+set -g message-bg colour18

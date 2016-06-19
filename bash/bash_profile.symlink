@@ -1,0 +1,5 @@
+# Login shells call bash_profile, non-login shells call bashrc. OSX's
+# Terminal.app runs a login shell by default for each new terminal window
+# calling bash_profile. Source bashrc from bash_profile for portability.
+
+test -e .bashrc && source .bashrc

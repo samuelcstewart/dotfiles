@@ -1,0 +1,183 @@
+"allow Use sensible settings ( iMproved )
+set nocompatible
+
+" Load plugins and indentation for file types
+filetype plugin indent on
+
+" Vundle and plugins
+if has("unix")
+  set rtp+=~/.vim/bundle/Vundle.vim
+  call vundle#begin()
+elseif has("win32")
+  set rtp+=$USERPROFILE/vimfiles/bundle/Vundle.vim
+  call vundle#begin('$USERPROFILE/vimfiles/bundle/')
+endif
+
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'chriskempson/base16-vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'rodjek/vim-puppet'
+Plugin 'othree/html5.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+
+call vundle#end()
+
+" Colours
+let base16colorspace=256
+set background=dark
+syntax on
+colorscheme base16-ocean
+
+" Behave with windows copy/paste. Use Ctrl+Q to enter into visual block mode.
+if has("win32")
+  source $VIMRUNTIME/mswin.vim
+  behave mswin
+endif
+
+" Spaces, tabs and indentation.
+set shiftwidth=2    " how many columns indented with << >> operations
+set softtabstop=2   " how many columns indented in insert mode
+set tabstop=2       " number of spaces inserted on tab with noexpandtab set
+set expandtab       " spaces inserted instead of tab character
+set autoindent      " Copy indent of last line on new line
+set shiftround      " round indent to multiple of shiftwidth
+
+" UI
+set number          " show line numbers
+set relativenumber  " use relative line numbers from current cursor position
+set showcmd         " show last command entered
+set cursorline      " highlight current line
+set wildmenu        " visual autocomplete menu
+set showmatch       " highlight matching parenthesis etc
+set mouse=a         " enable mouse in all modes where supported
+set laststatus=2    " always display status line in all windows
+set noshowmode      " hide default mode text --INSERT-- Shows in Powerline
+set nrformats=		  " treat all numbers as decimal, not octal
+set scrolloff=10    " always display 10 lines above and below cursor
+set ruler           " show line number in status bar
+
+" Use unix file format by default
+set fileformat=unix
+
+" Allow navigation away from changed buffers without bang
+set hidden
+
+" Natural splits
+set splitbelow
+set splitright
+
+" Searching
+set incsearch       " show where search pattern matches, as typed so far
+set hlsearch        " highlight search matches
+
+" Case sensitivity
+"
+" ignore case turns off case sensitivity in pattern matching. Smart case
+" matches all patterns if the string is all lowercase. If the string contains
+" upper case characters, it will perform a case sensitive search.
+" Use \c and \C to override, insensitive/sensitive respectively.
+set ignorecase
+set smartcase
+
+" Syntastic
+"let g:syntastic_cpp_compiler = 'clang++'
+"let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libc++'
+
+" Airline
+let g:airline_powerline_fonts=1                   " use patched powerline fonts (flash symbols)
+
+" Translate frequently typoed commands
+command! -bang -complete=file -nargs=? E e<bang> <args>
+command! -bang -complete=file -nargs=? W w<bang> <args>
+command! -bang -complete=file -nargs=? WQ wq<bang> <args>
+command! -bang -complete=file -nargs=? Wq wq<bang> <args>
+command! -bang Q q<bang>
+command! -bang Qa qa<bang>
+command! -bang QA qa<bang>
+command! -bang Wa wa<bang>
+command! -bang WA wa<bang>
+
+" Encoding
+set termencoding=utf-8
+set encoding=utf-8
+set backspace=indent,eol,start  " backspace over everything
+
+" Vim uses only uses swap files on unix, and not when using sudo. Maintain these in
+" their own directory. Create directory if it doesn't exist. If not unix, no swapfiles.
+if !strlen($SUDO_USER) && has('unix')
+  set swapfile
+  set directory^=~/.vim/swap/
+  " Create swap directory if not exists
+  if !isdirectory($HOME . '/.vim/swap')
+    call mkdir($HOME . '/.vim/swap', 'p', 0700)
+  endif
+else
+  set noswapfile
+endif
+
+" Repeat timeout to half a second
+set timeoutlen=500
+
+"""" Key mappings
+
+" Leader
+let mapleader=","   " change default \ leader to ,
+
+" Clear search highlights
+nnoremap <leader><space> :nohlsearch<CR> " clear search highlighting
+
+" Key mappings for CtrlP. Use secondary keystroke to open certain mode.
+nnoremap <C-p>f :CtrlP <CR>                   " Open CtrlP in File mode
+nnoremap <C-p>b :CtrlPBuffer <CR>             " Open CtrlP in Buffer mode
+nnoremap <C-p>t :CtrlPTag <CR>                " Open CtrlP in Tag mode
+
+" Easy split navigation (normal mode only)
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Whitespace
+highlight TrailingWhiteSpace ctermbg=19 guibg=#4f5b66
+nnoremap <Leader>dw :%s/\s\+$//e<CR>            " Delete all trailing whitespace in current buffer
+match TrailingWhiteSpace /\s\+$/                " Match trailing whitespace
+
+" When in insert mode, matches all trailing whitespace not at the end of the current line
+" Stops annoying highlights when spacing and tabbing at the end of the current line.
+augroup augroup_whitespace
+  autocmd!
+  autocmd InsertEnter * match TrailingWhiteSpace /\s\+\%#\@<!$/
+  autocmd InsertLeave * match TrailingWhiteSpace /\s\+$/
+augroup END
+
+" Auto command group for setting options per filetype
+augroup augroup_filetypes
+  autocmd!
+  "autocmd BufRead,BufNewFile *.md set filetype=markdown         " by default vim7.4 uses modulo2 on .md extensions?
+  autocmd BufRead,BufNewFile *.pp set filetype=puppet
+  "autocmd FileType markdown
+    "\ setlocal colorcolumn=81 |
+    "\ setlocal formatoptions=ant |    " see :help fo-table
+    "\ setlocal wrap |
+    "\ setlocal spell
+  autocmd FileType python
+    \ setlocal shiftwidth=4 |
+    \ setlocal softtabstop=4 |
+    \ setlocal tabstop=8 |
+    \ setlocal textwidth=79 |
+    \ setlocal expandtab |
+    \ setlocal autoindent |
+    \ setlocal colorcolumn=80
+  autocmd FileType php
+    \ setlocal shiftwidth=4 |
+    \ setlocal softtabstop=4 |
+    \ setlocal tabstop=4 |
+    \ setlocal expandtab |
+    \ setlocal autoindent
+augroup END

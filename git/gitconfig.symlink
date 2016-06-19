@@ -1,0 +1,19 @@
+[user]
+  email = samuelcstewart@icloud.com
+  name = Samuel Stewart
+
+[push]
+  default = matching
+
+[mergetool "vimdiff"]
+  cmd="vim -c 'Gdiff' $MERGED"     # use fugitive.vim for 3-way merge
+  keepbackup=false
+
+[filter "lfs"]
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true
+
+[core]
+  editor = vim
+  excludesfile = ~/dotfiles/git/gitignore_global
