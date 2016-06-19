@@ -7,7 +7,9 @@ eval sh ~/dotfiles/shell/base16-ocean.dark.sh
 if command --search tmux > /dev/null
   if test -z (echo $DESKTOP_SESSION)
     if test -z (echo $TMUX)
-      tmux
+      if not test (tmux attach -t default)
+        tmux new-session -s default
+      end
     end
   end
 end
