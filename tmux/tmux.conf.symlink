@@ -22,8 +22,8 @@ setw -g mode-keys vi
 set -g base-index 1
 set -g pane-base-index 1
 
-# Disable mouse control
-set -g mouse off
+# Mouse control
+set -g mouse on
 
 # Mouse options < 2.1
 #set -g mode-mouse on
