@@ -47,7 +47,7 @@ elif [ "${TERM%%-*}" = "screen" ]; then
 else
   printf_template="\033]4;%d;rgb:%s\033\\"
   printf_template_var="\033]%d;rgb:%s\033\\"
-  printf_template_custom="\033]%s%s\033\\"
+  printf_template_custom="\033P]%s%s\033\\"
 fi
 
 # 16 color space
@@ -89,7 +89,7 @@ if [ -n "$ITERM_SESSION_ID" ]; then
 else
   printf $printf_template_var 10 $color_foreground
   printf $printf_template_var 11 $color_background
-  printf $printf_template_var 12 $color_cursor
+  printf $printf_template_var 12 ";7"
 fi
 
 # clean up
