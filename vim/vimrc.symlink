@@ -29,14 +29,16 @@ Plugin 'rodjek/vim-puppet'
 Plugin 'othree/html5.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'samuelcstewart/base16-vim'
 Plugin 'romainl/Apprentice'
 
 call vundle#end()
 
 " Colours
+let base16colorspace=256
 set background=dark
 syntax on
-colorscheme apprentice
+colorscheme base16-ocean
 
 " Behave with windows copy/paste. Use Ctrl+Q to enter into visual block mode.
 if has("win32")
