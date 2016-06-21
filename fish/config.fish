@@ -9,7 +9,7 @@ if status --is-interactive
 # if not in desktop session on linux, or on a mac try and attach to a tmux
 # session or create a new one.
   if command --search tmux > /dev/null
-    if test -z (echo $DESKTOP_SESSION); and not (uname | grep Darwin)
+    if test -z (echo $DESKTOP_SESSION); and not uname | grep Darwin
       if test -z (echo $TMUX)
         if not test (tmux attach)
           tmux new-session
@@ -37,7 +37,7 @@ if status --is-interactive
   set fish_color_search_match \x2d\x2dbackground\x3dpurple
   set fish_color_selection \x2d\x2dbackground\x3dpurple
   set fish_color_valid_path \x2d\x2dunderline
-  set fish_key_bindings fish_default_key_bindings
+  set fish_key_bindings fish_vi_key_bindings
   set fish_pager_color_completion normal
   set fish_pager_color_description 555\x1eyellow
   set fish_pager_color_prefix cyan

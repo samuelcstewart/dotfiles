@@ -27,14 +27,34 @@ function fish_prompt
   set_color normal
 
   # git
-  set_color normal
   printf '%s ' (__fish_git_prompt)
 
   # Line 2
   echo
+
+  if test "$fish_key_bindings" = "fish_vi_key_bindings"
+    printf '['
+    switch $fish_bind_mode
+      case default
+        set_color --bold red
+        printf 'n'
+      case insert
+        set_color --bold green
+        printf 'i'
+      case replace-one
+        set_color --bold white
+        printf 'r'
+      case visual
+        set_color --bold magenta
+        printf 'v'
+    end
+    set_color normal
+    printf '] '
+  end
+
   if test $VIRTUAL_ENV
     printf "(%s) " (set_color blue)(basename $VIRTUAL_ENV)(set_color normal)
   end
-  printf '↪ '
+  printf '➜ '
   set_color normal
 end
