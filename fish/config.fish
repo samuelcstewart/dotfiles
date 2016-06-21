@@ -6,12 +6,13 @@ if status --is-interactive
   # color the shell
   eval sh ~/dotfiles/shell/base16-ocean.dark.sh
 
-  # start tmux if exists, not in desktop environment, and not already running.
+# if not in desktop session on linux, or on a mac try and attach to a tmux
+# session or create a new one.
   if command --search tmux > /dev/null
-    if test -z (echo $DESKTOP_SESSION)
+    if test -z (echo $DESKTOP_SESSION); and not (uname | grep Darwin)
       if test -z (echo $TMUX)
-        if not test (tmux attach -t default)
-          tmux new-session -s default
+        if not test (tmux attach)
+          tmux new-session
         end
       end
     end

@@ -4,13 +4,20 @@
 [[ $- != *i* ]] && return
 
 # if fish available, use it.
-if type fish &>/dev/null; then
-  exec fish
-fi
+#if type fish &>/dev/null; then
+#  exec fish
+#fi
 
-# if has tmux, not desktop session, and not already running, start it
-if type tmux &>/dev/null && [[ -z "$DESKTOP_SESSION" ]]; then
-  [[ -z "$TMUX" ]] && exec tmux
+# if we're in a desktop session on linux, or on OSX, have tmux attach to existing session or start a new one.
+if type tmux &>/dev/null && [[ -z "$DESKTOP_SESSION" ]] && [[ `uname` != 'Darwin' ]]; then
+  if [[ -z "$TMUX" ]]; then
+    ID="`tmux ls | grep -m1 attached | cut -d: -f1`"
+    if [[ -z "$ID" ]]; then
+      tmux new-session
+    else
+      tmux attach-session -t "$ID"
+    fi
+  fi
 fi
 
 if type fortune &>/dev/null; then
