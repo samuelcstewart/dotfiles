@@ -34,7 +34,7 @@ if status --is-interactive
   set fish_color_valid_path
   set fish_key_bindings fish_vi_key_bindings
 
-  set -x TZ 'Auckland/Pacific'
+  set -x TZ 'Pacific/Auckland'
 
   #set -x LESS_TERMCAP_mb \x1b\x5b01\x3b31m
   #set -x LESS_TERMCAP_md \x1b\x5b01\x3b31m
