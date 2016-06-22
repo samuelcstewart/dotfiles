@@ -19,29 +19,20 @@ if status --is-interactive
   end
 
   set __fish_init_1_50_0 \x1d
-  set fish_color_autosuggestion 9C9C9C
-  set fish_color_command F4F4F4
+  set fish_color_autosuggestion 4F5B66
+  set fish_color_command brightwhite
   set fish_color_comment B0B0B0
-  set fish_color_cwd green
-  set fish_color_cwd_root red
-  set fish_color_end 969696
-  set fish_color_error FFA779
+  set fish_color_end orange
+  set fish_color_error red
   set fish_color_escape cyan
-  set fish_color_history_current cyan
-  set fish_color_match cyan
-  set fish_color_normal normal
-  set fish_color_operator cyan
-  set fish_color_param A0A0F0
-  set fish_color_quote 666A80
-  set fish_color_redirection FAFAFA
-  set fish_color_search_match \x2d\x2dbackground\x3dpurple
-  set fish_color_selection \x2d\x2dbackground\x3dpurple
-  set fish_color_valid_path \x2d\x2dunderline
+  set fish_color_match magenta
+  set fish_color_operator magenta
+  set fish_color_param cyan
+  set fish_color_quote green
+  set fish_color_redirection white
+  set fish_color_search_match "--background=343D46"
+  set fish_color_valid_path
   set fish_key_bindings fish_vi_key_bindings
-  set fish_pager_color_completion normal
-  set fish_pager_color_description 555\x1eyellow
-  set fish_pager_color_prefix cyan
-  set fish_pager_color_progress cyan
 
   #set -x LESS_TERMCAP_mb \x1b\x5b01\x3b31m
   #set -x LESS_TERMCAP_md \x1b\x5b01\x3b31m
