@@ -31,7 +31,6 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'samuelcstewart/base16-vim'
 Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'romainl/Apprentice'
 
 call vundle#end()
 
@@ -154,6 +153,12 @@ nnoremap <C-H> <C-W><C-H>
 highlight TrailingWhiteSpace ctermbg=19 guibg=#4f5b66
 nnoremap <Leader>dw :%s/\s\+$//e<CR>            " Delete all trailing whitespace in current buffer
 match TrailingWhiteSpace /\s\+$/                " Match trailing whitespace
+
+" Folding
+
+" Space to toggle folds.
+nnoremap <Space> za
+vnoremap <Space> za
 
 " Indent guides
 let g:indent_guides_auto_colors=0

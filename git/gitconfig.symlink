@@ -16,4 +16,4 @@
 
 [core]
   editor = vim
-  excludesfile = ~/dotfiles/git/gitignore_global
+  excludesfile = ~/.gitignore_global
