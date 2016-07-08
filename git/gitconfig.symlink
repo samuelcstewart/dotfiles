@@ -5,10 +5,6 @@
 [push]
   default = matching
 
-[mergetool "vimdiff"]
-  cmd="vim -c 'Gdiff' $MERGED"     # use fugitive.vim for 3-way merge
-  keepbackup=false
-
 [filter "lfs"]
   clean = git-lfs clean %f
   smudge = git-lfs smudge %f
@@ -17,3 +13,9 @@
 [core]
   editor = vim
   excludesfile = ~/.gitignore_global
+
+[mergetool "fugitive"]
+	cmd = vim -f -c \"Gvdiff\" \"$MERGED\"
+
+[merge]
+	tool = fugitive
