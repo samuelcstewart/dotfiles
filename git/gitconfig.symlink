@@ -3,7 +3,7 @@
   name = Samuel Stewart
 
 [push]
-  default = matching
+  default = current
 
 [filter "lfs"]
   clean = git-lfs clean %f
