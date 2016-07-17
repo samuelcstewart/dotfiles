@@ -1,4 +1,5 @@
 #
+[[ $- != *i* ]] && return
 source ~/dotfiles/antigen/antigen.zsh
 
 # Plugins from oh-my-zsh repo
@@ -13,7 +14,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 
 # Theme
-antigen theme simple
+antigen theme ~/dotfiles/zsh stewpot --no-local-clone
 
 antigen apply
 #
@@ -21,15 +22,13 @@ antigen apply
 BASE16_SHELL="$HOME/dotfiles/shell/base16-ocean.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
-# Attach to existing tmux session
-if type tmux &>/dev/null; then
-  if [[ -z "$TMUX" ]]; then
-    ID="`tmux ls | grep -m1 attached | cut -d: -f1`"
-    if [[ -z "$ID" ]]; then
-      tmux new-session
-    else
-      tmux attach-session -t "$ID"
-    fi
+# Attach to an existing deattached session, or start a new one
+if [[ -z "$TMUX" ]] ;then
+  ID="`tmux ls | grep -vm1 attached | cut -d: -f1`" # get the id of a deattached session
+  if [[ -z "$ID" ]] ;then # if not available create a new one
+    tmux new-session
+  else
+    tmux attach-session -t "$ID" # if available attach to it
   fi
 fi
 
