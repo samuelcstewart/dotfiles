@@ -18,7 +18,7 @@ function TRAPINT() {
   return $(( 128 + $1 ))
 }
 
-PROMPT='%{$fg[white]%}%1~%{$fg[yellow]%}$(git_prompt_info)%{$reset_color%}${vim_mode} '
+PROMPT='%{$fg[white]%}%1~% $(git_super_status)%{$reset_color%}${vim_mode} '
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" ("
 ZSH_THEME_GIT_PROMPT_SUFFIX=")"

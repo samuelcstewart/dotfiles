@@ -13,6 +13,8 @@ antigen bundle compleat
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 
+antigen bundle olivierverdier/zsh-git-prompt
+
 # Theme
 antigen theme ~/dotfiles/zsh stewpot --no-local-clone
 
