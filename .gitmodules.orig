@@ -2,5 +2,10 @@
 	path = vim/bundle/Vundle.vim
 	url = https://github.com/VundleVim/Vundle.vim.git
 [submodule "antigen"]
+<<<<<<< HEAD
   path = antigen
+  url = https://github.com/zsh-users/antigen
+=======
+  path = "antigen"
   url = https://github.com/zsh-users/antigen.git
+>>>>>>> c5bd79386f172e7ed08214397615cf7ec126497a
