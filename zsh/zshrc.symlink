@@ -1,24 +1,48 @@
 #
 [[ $- != *i* ]] && return
-source ~/dotfiles/antigen/antigen.zsh
 
-# Plugins from oh-my-zsh repo
-antigen use oh-my-zsh
-antigen bundle command-not-found
-antigen bundle history
-antigen bundle history-substring-search
-antigen bundle compleat
+source ~/.zplug/init.zsh
 
-# Plugins from zsh-users repo
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-autosuggestions
+zplug "plugins/command-not-found", from:oh-my-zsh
+zplug "plugins/history",           from:oh-my-zsh
+zplug "mafredri/zsh-async"
+zplug "sindresorhus/pure"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-syntax-highlighting", nice:10
+zplug "plugins/history-substring-search", nice:10, from:oh-my-zsh
 
-antigen bundle olivierverdier/zsh-git-prompt
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+  printf "Install? [y/N]: "
+  if read -q; then
+    echo; zplug install
+  fi
+fi
 
-# Theme
-antigen theme ~/dotfiles/zsh stewpot --no-local-clone
+zplug load
 
-antigen apply
+# history
+if [ -z "$HISTFILE" ]; then
+  HISTFILE=$HOME/.zsh_history
+fi
+
+HISTSIZE=100000
+SAVEHIST=100000
+setopt append_history
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_verify
+setopt inc_append_history
+setopt share_history
+
+zstyle ':completion:*' menu select
+
+# vim keybindings for substring search
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
 #
 # Base16 Shell
 BASE16_SHELL="$HOME/dotfiles/shell/base16-ocean.dark.sh"
