@@ -68,8 +68,8 @@ bindkey -v
 export KEYTIMEOUT=1
 
 ## Prompt
-vim_ins_mode=" %{$fg_bold[magenta]%}>%{$reset_color%}"
-vim_cmd_mode=" %{$fg_bold[red]%}<%{$reset_color%}"
+vim_ins_mode=" %{$fg_bold[cyan]%}❯%{$reset_color%}"
+vim_cmd_mode=" %{$fg_bold[red]%}❮%{$reset_color%}"
 vim_mode=$vim_ins_mode
 
 function zle-keymap-select {
