@@ -6,7 +6,8 @@ source ~/.zplug/init.zsh
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/history",           from:oh-my-zsh
 zplug "mafredri/zsh-async"
-zplug "sindresorhus/pure"
+#zplug "sindresorhus/pure"
+zplug "olivierverdier/zsh-git-prompt", as:plugin, use:"zshrc.sh"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting", nice:10
 zplug "plugins/history-substring-search", nice:10, from:oh-my-zsh
@@ -65,3 +66,26 @@ fi
 # VI
 bindkey -v
 export KEYTIMEOUT=1
+
+## Prompt
+vim_ins_mode=" %{$fg_bold[magenta]%}>%{$reset_color%}"
+vim_cmd_mode=" %{$fg_bold[red]%}<%{$reset_color%}"
+vim_mode=$vim_ins_mode
+
+function zle-keymap-select {
+  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
+  zle reset-prompt
+}
+zle -N zle-keymap-select
+
+function zle-line-finish {
+  vim_mode=$vim_ins_mode
+}
+zle -N zle-line-finish
+
+function TRAPINT() {
+  vim_mode=$vim_ins_mode
+  return $(( 128 + $1 ))
+}
+
+PROMPT='%{$fg[white]%}%1~% $(git_super_status)%{$reset_color%}${vim_mode} '
