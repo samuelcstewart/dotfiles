@@ -6,8 +6,7 @@ if &shell =~# 'fish$'
   set shell=sh
 endif
 
-" Load plugins and indentation for file types
-filetype plugin indent on
+filetype off
 
 " Vundle and plugins
 if has("unix")
@@ -30,8 +29,13 @@ Plugin 'godlygeek/tabular'
 Plugin 'samuelcstewart/base16-vim'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'sheerun/vim-polyglot'
+Plugin 'sirver/ultisnips'
+Plugin 'honza/vim-snippets'
 
 call vundle#end()
+
+" Load plugins and indentation for file types
+filetype plugin indent on
 
 " Colours
 let base16colorspace=256
@@ -147,6 +151,11 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" UltiSnips triggers
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " Whitespace
 highlight TrailingWhiteSpace ctermbg=19 guibg=#4f5b66
