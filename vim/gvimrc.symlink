@@ -1,4 +1,4 @@
-set guifont=Source\ Code\ Pro\ for\ Powerline 10
+set guifont=Source\ Code\ Pro\ for\ Powerline:h13
 set vb t_vb=                    " disable fucking bell
 set guicursor+=n-v-c:blinkon0   " disable cursor blinking
 set guioptions-=L               " stop window moving when splitting in windows

@@ -31,6 +31,7 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'suan/vim-instant-markdown'
 
 call vundle#end()
 
