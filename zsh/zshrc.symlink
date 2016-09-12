@@ -8,7 +8,6 @@ zplug "plugins/history",           from:oh-my-zsh
 zplug "plugins/vi-mode",           from:oh-my-zsh
 zplug "plugins/docker",            from:oh-my-zsh
 zplug "plugins/docker-compose",    from:oh-my-zsh
-zplug "plugins/ssh-agent",        from:oh-my-zsh
 zplug "mafredri/zsh-async"
 zplug "sindresorhus/pure"
 zplug "olivierverdier/zsh-git-prompt", as:plugin, use:"zshrc.sh"
@@ -61,14 +60,14 @@ BASE16_SHELL="$HOME/dotfiles/shell/base16-ocean.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # Attach to an existing deattached session, or start a new one
-if [[ -z "$TMUX" ]] ;then
-  ID="`tmux ls | grep -vm1 attached | cut -d: -f1`" # get the id of a deattached session
-  if [[ -z "$ID" ]] ;then # if not available create a new one
-    tmux new-session
-  else
-    tmux attach-session -t "$ID" # if available attach to it
-  fi
-fi
+#if [[ -z "$TMUX" ]] ;then
+  #ID="`tmux ls | grep -vm1 attached | cut -d: -f1`" # get the id of a deattached session
+  #if [[ -z "$ID" ]] ;then # if not available create a new one
+    #tmux new-session
+  #else
+    #tmux attach-session -t "$ID" # if available attach to it
+  #fi
+#fi
 
 if type fortune &>/dev/null; then
   fortune

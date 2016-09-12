@@ -32,6 +32,7 @@ Plugin 'sheerun/vim-polyglot'
 Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'suan/vim-instant-markdown'
+Plugin 'fatih/vim-go'
 
 call vundle#end()
 
