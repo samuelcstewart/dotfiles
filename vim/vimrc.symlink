@@ -17,8 +17,8 @@ elseif has("win32")
   call vundle#begin('$USERPROFILE/vimfiles/bundle/')
 endif
 
-Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'vim-airline/vim-airline'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-surround'
@@ -26,13 +26,13 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'othree/html5.vim'
 Plugin 'godlygeek/tabular'
-Plugin 'samuelcstewart/base16-vim'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'fatih/vim-go'
+Plugin 'tomasr/molokai'
 
 call vundle#end()
 
@@ -40,10 +40,11 @@ call vundle#end()
 filetype plugin indent on
 
 " Colours
-let base16colorspace=256
+set t_Co=256
 set background=dark
 syntax on
-colorscheme base16-ocean
+colorscheme molokai
+let g:rehash256=1
 
 " Behave with windows copy/paste. Use Ctrl+Q to enter into visual block mode.
 if has("win32")
@@ -61,7 +62,7 @@ set shiftround      " round indent to multiple of shiftwidth
 
 " UI
 set number          " show line numbers
-set relativenumber  " use relative line numbers from current cursor position
+"set relativenumber  " use relative line numbers from current cursor position
 set showcmd         " show last command entered
 set cursorline      " highlight current line
 set wildmenu        " visual autocomplete menu
@@ -72,6 +73,7 @@ set noshowmode      " hide default mode text --INSERT-- Shows in Powerline
 set nrformats=		  " treat all numbers as decimal, not octal
 set scrolloff=10    " always display 10 lines above and below cursor
 set ruler           " show line number in status bar
+set clipboard=unnamed
 
 " Use unix file format by default
 set fileformat=unix

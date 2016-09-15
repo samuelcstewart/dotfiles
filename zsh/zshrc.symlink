@@ -26,25 +26,25 @@ fi
 
 zplug load
 
-# history
-if [ -z "$HISTFILE" ]; then
-  HISTFILE=$HOME/.zsh_history
-fi
+# HISTORY #
+HISTFILE=~/.zsh_history
+HISTSIZE=15000
+SAVEHIST=10000
+setopt append_history          # sessions append to history file, rather then replace it.
+setopt extended_history        # saves timestamps to history
+setopt hist_expire_dups_first  # removes oldest history event with duplicate
+setopt hist_ignore_dups        # do not enter command into history if duplicates of previous event
+setopt hist_ignore_space       # remove commands with leading space from history
+setopt hist_verify             # reload line into editing buffer when using history expansion
+setopt inc_append_history_time # history is added incrementally rather than on shell exit
 
-HISTSIZE=100000
-SAVEHIST=100000
-setopt append_history
-setopt extended_history
-setopt hist_expire_dups_first
-setopt hist_ignore_dups
-setopt hist_ignore_space
-setopt hist_verify
-setopt inc_append_history
-setopt share_history
+
+# DIR STACK #
+setopt auto_pushd              # push directories to dir stack
+setopt pushd_minus             # invert meanings of + and - when working with dir stack
+setopt pushd_silent            # do not print dir stack of pushd/popd
 
 zstyle ':completion:*' menu select
-zstyle :omz:plugins:ssh-agent identities personal_rsa mbie_rsa
-zstyle :omz:plugins:ssh-agent agent-forwarding on
 
 # Vim keybindings for substring search
 bindkey -M vicmd 'k' history-substring-search-up
@@ -56,8 +56,8 @@ bindkey "$terminfo[cud1]" history-substring-search-down
 
 #
 # Base16 Shell
-BASE16_SHELL="$HOME/dotfiles/shell/base16-ocean.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+#BASE16_SHELL="$HOME/dotfiles/shell/base16-ocean.dark.sh"
+#[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # Attach to an existing deattached session, or start a new one
 #if [[ -z "$TMUX" ]] ;then
