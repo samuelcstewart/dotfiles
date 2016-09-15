@@ -54,12 +54,7 @@ zmodload zsh/terminfo
 bindkey "$terminfo[cuu1]" history-substring-search-up
 bindkey "$terminfo[cud1]" history-substring-search-down
 
-#
-# Base16 Shell
-#BASE16_SHELL="$HOME/dotfiles/shell/base16-ocean.dark.sh"
-#[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-
-# Attach to an existing deattached session, or start a new one
+# Attach to an existing deattached tmux session, or start a new one
 #if [[ -z "$TMUX" ]] ;then
   #ID="`tmux ls | grep -vm1 attached | cut -d: -f1`" # get the id of a deattached session
   #if [[ -z "$ID" ]] ;then # if not available create a new one
