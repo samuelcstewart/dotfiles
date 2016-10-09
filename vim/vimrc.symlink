@@ -1,7 +1,4 @@
-"allow Use sensible settings ( iMproved )
-set nocompatible
-
-" when using fish, tell vim to use sh.
+set nocompatible " when using fish, tell vim to use sh.
 if &shell =~# 'fish$'
   set shell=sh
 endif
@@ -17,8 +14,10 @@ elseif has("win32")
   call vundle#begin('$USERPROFILE/vimfiles/bundle/')
 endif
 
+Plugin 'chriskempson/base16-vim'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-airline/vim-airline'
+"Plugin 'itchyny/lightline.vim'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-surround'
@@ -32,7 +31,6 @@ Plugin 'sirver/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'fatih/vim-go'
-Plugin 'tomasr/molokai'
 
 call vundle#end()
 
@@ -40,11 +38,10 @@ call vundle#end()
 filetype plugin indent on
 
 " Colours
-set t_Co=256
-set background=dark
-syntax on
-colorscheme molokai
-let g:rehash256=1
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
 
 " Behave with windows copy/paste. Use Ctrl+Q to enter into visual block mode.
 if has("win32")
@@ -88,6 +85,7 @@ set splitright
 " Searching
 set incsearch       " show where search pattern matches, as typed so far
 set hlsearch        " highlight search matches
+
 
 " Case sensitivity
 "
@@ -189,22 +187,22 @@ augroup augroup_filetypes
   "autocmd BufRead,BufNewFile *.md set filetype=markdown         " by default vim7.4 uses modulo2 on .md extensions?
   autocmd BufRead,BufNewFile *.pp set filetype=puppet
   "autocmd FileType markdown
-    "\ setlocal colorcolumn=81 |
-    "\ setlocal formatoptions=ant |    " see :help fo-table
-    "\ setlocal wrap |
-    "\ setlocal spell
+  "\ setlocal colorcolumn=81 |
+  "\ setlocal formatoptions=ant |    " see :help fo-table
+  "\ setlocal wrap |
+  "\ setlocal spell
   autocmd FileType python
-    \ setlocal shiftwidth=4 |
-    \ setlocal softtabstop=4 |
-    \ setlocal tabstop=8 |
-    \ setlocal textwidth=79 |
-    \ setlocal expandtab |
-    \ setlocal autoindent |
-    \ setlocal colorcolumn=80
+        \ setlocal shiftwidth=4 |
+        \ setlocal softtabstop=4 |
+        \ setlocal tabstop=8 |
+        \ setlocal textwidth=79 |
+        \ setlocal expandtab |
+        \ setlocal autoindent |
+        \ setlocal colorcolumn=80
   autocmd FileType php
-    \ setlocal shiftwidth=4 |
-    \ setlocal softtabstop=4 |
-    \ setlocal tabstop=4 |
-    \ setlocal expandtab |
-    \ setlocal autoindent
+        \ setlocal shiftwidth=4 |
+        \ setlocal softtabstop=4 |
+        \ setlocal tabstop=4 |
+        \ setlocal expandtab |
+        \ setlocal autoindent
 augroup END

@@ -1,5 +1,8 @@
+# Load the shell dotfiles, and then some:
+# * ~/.path can be used to extend `$PATH`.
+# * ~/.extra can be used for other settings you don’t want to commit.
+
 # Login shells call bash_profile, non-login shells call bashrc. OSX's
 # Terminal.app runs a login shell by default for each new terminal window
 # calling bash_profile. Source bashrc from bash_profile for portability.
-
 test -e .bashrc && source .bashrc
