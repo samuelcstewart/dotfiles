@@ -1,0 +1,45 @@
+" vimperrator
+
+" set the title bar to something cute
+set titlestring="Firefox Vimp"
+
+" set the search engines and turn off suggestions for others
+set defsearch=google
+set suggestengines=google
+
+" completion priority (open, tabopen etc)
+" bookmarks, suggestions, awesome bar
+set complete=bSl
+
+" maximum results
+set maxitems=10
+
+" scroll height of <C-d> / <C-u>
+set scroll=10
+
+" open newtabs for type pages (downloads, prefs, etc)
+set newtab=all
+
+" don't focus any input elements on page load
+" set focuscontent
+
+" show tabbar only
+set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
+
+" needs the 'No Close Button' Firefox addon - preference was removed in Firefox 31
+set! browser.tabs.closeButtons=2
+
+" leader
+let mapleader=','
+
+" tab control - cycle and move tabs much like you would windows in i3
+noremap <C-h> gT
+noremap <C-l> gt
+noremap <C-S-h> :tabmove! -1<CR>
+noremap <C-S-l> :tabmove! +1<CR>
+
+" reload config
+noremap <Leader>r :source ~/.vimperatorrc<CR>
+
+" requires scheme present in ~/.vimperrator/colors
+colorscheme arc-dark
