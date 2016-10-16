@@ -3,6 +3,11 @@ alias open='xdg-open "$@"'
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
 
+# zsh option removes commands starting with space from history
+# ( setopt hist_ignore_space )
+alias cd=" cd"
+alias ls=" ls"
+
 # easier nav up directory tree
 alias ..="cd .."
 alias ...="cd ../.."
@@ -10,7 +15,19 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
 # open i3 config
-alias i3c="vim $HOME/.config/i3/config"
+alias i3c=" vim $HOME/.config/i3/config"
+
+# open vim config
+alias vimc=" vim $HOME/.vimrc"
+
+# open zsh config
+alias zshc=" vim $HOME/.zshrc"
+
+# open aliases
+alias aliasc=" vim $HOME/.aliases"
+
+# open vimperator config
+alias vimpc=" vim $HOME/.vimperatorrc"
 
 # set color parameter for OSX/GNU
 if ls --color > /dev/null 2>&1; then # GNU `ls`
