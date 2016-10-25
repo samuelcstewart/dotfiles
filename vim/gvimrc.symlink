@@ -1,3 +1,9 @@
+" Behave with windows copy/paste. Use Ctrl+Q to enter into visual block mode.
+if has("win32")
+  source $VIMRUNTIME/mswin.vim
+  behave mswin
+endif
+
 if has("gui_macvim")
   set guifont=Source\ Code\ Pro\ for\ Powerline:h13
 else

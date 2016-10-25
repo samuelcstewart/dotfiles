@@ -1,38 +1,70 @@
-set nocompatible " when using fish, tell vim to use sh.
+set nocompatible
+
+" when using fish, tell vim to use sh.
 if &shell =~# 'fish$'
   set shell=sh
 endif
 
 filetype off
 
-" Vundle and plugins
-if has("unix")
-  set rtp+=~/.vim/bundle/Vundle.vim
-  call vundle#begin()
-elseif has("win32")
-  set rtp+=$USERPROFILE/vimfiles/bundle/Vundle.vim
-  call vundle#begin('$USERPROFILE/vimfiles/bundle/')
+" --------------------------------------------------------------- "
+"  VIM PLUG: https://github.com/junegunn/vim-plug                 "
+" --------------------------------------------------------------- "
+
+" Install vim-plug if we don't already have it
+if empty(glob("~/.vim/autoload/plug.vim"))
+  execute '!mkdir -p ~/.vim/plugged'
+  execute '!mkdir -p ~/.vim/autoload'
+  execute '!curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim'
 endif
 
-Plugin 'chriskempson/base16-vim'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vim-airline/vim-airline'
-"Plugin 'itchyny/lightline.vim'
-Plugin 'gmarik/Vundle.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-fugitive'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'othree/html5.vim'
-Plugin 'godlygeek/tabular'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'sirver/ultisnips'
-Plugin 'honza/vim-snippets'
-Plugin 'suan/vim-instant-markdown'
-Plugin 'fatih/vim-go'
+call plug#begin('~/.vim/plugged')
 
-call vundle#end()
+" Colours
+Plug 'chriskempson/base16-vim'
+
+" Status line
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Syntastic
+Plug 'scrooloose/syntastic'
+
+" Git utils
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" Snippets
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
+
+" Vim surround. Repeat.vim to allow repition of surround shortcuts with dot
+" operator
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+
+" Tabular - line up arbritary text
+Plug 'godlygeek/tabular'
+
+" CtrlP fuzzy file/buffer/tag finder
+Plug 'ctrlpvim/ctrlp.vim'
+
+" Indentation guides
+Plug 'nathanaelkane/vim-indent-guides'
+
+" Polyglot syntax/indentation files for many languages
+Plug 'sheerun/vim-polyglot'
+
+" Go!
+Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
+
+" Render markdown live in browser. See GitHub for further setup instructions
+Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
+
+" Easy comments
+Plug 'scrooloose/nerdcommenter'
+
+call plug#end()
 
 " Load plugins and indentation for file types
 filetype plugin indent on
@@ -42,12 +74,7 @@ if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
-
-" Behave with windows copy/paste. Use Ctrl+Q to enter into visual block mode.
-if has("win32")
-  source $VIMRUNTIME/mswin.vim
-  behave mswin
-endif
+syntax on
 
 " Spaces, tabs and indentation.
 set shiftwidth=2    " how many columns indented with << >> operations
@@ -59,7 +86,6 @@ set shiftround      " round indent to multiple of shiftwidth
 
 " UI
 set number          " show line numbers
-"set relativenumber  " use relative line numbers from current cursor position
 set showcmd         " show last command entered
 set cursorline      " highlight current line
 set wildmenu        " visual autocomplete menu
@@ -171,7 +197,7 @@ nnoremap <Space> za
 vnoremap <Space> za
 
 " Indent guides
-let g:indent_guides_auto_colors=0
+"let g:indent_guides_auto_colors=0
 
 " When in insert mode, matches all trailing whitespace not at the end of the current line
 " Stops annoying highlights when spacing and tabbing at the end of the current line.
