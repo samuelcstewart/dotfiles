@@ -21,7 +21,7 @@ set scroll=10
 set newtab=all
 
 " don't focus any input elements on page load
-" set focuscontent
+set focuscontent
 
 " show tabbar only
 set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs

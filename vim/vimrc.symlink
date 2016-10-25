@@ -96,7 +96,7 @@ set noshowmode      " hide default mode text --INSERT-- Shows in Powerline
 set nrformats=		  " treat all numbers as decimal, not octal
 set scrolloff=10    " always display 10 lines above and below cursor
 set ruler           " show line number in status bar
-set clipboard=unnamed
+"set clipboard=unnamed
 
 " Use unix file format by default
 set fileformat=unix

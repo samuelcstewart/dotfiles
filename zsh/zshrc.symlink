@@ -83,4 +83,4 @@ bindkey -v
 export KEYTIMEOUT=1
 
 # aliases
-source .aliases
+source $HOME/.aliases
