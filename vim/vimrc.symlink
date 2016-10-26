@@ -64,6 +64,9 @@ Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
 " Easy comments
 Plug 'scrooloose/nerdcommenter'
 
+" Markdown extensions
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+
 call plug#end()
 
 " Load plugins and indentation for file types
@@ -210,13 +213,14 @@ augroup END
 " Auto command group for setting options per filetype
 augroup augroup_filetypes
   autocmd!
-  "autocmd BufRead,BufNewFile *.md set filetype=markdown         " by default vim7.4 uses modulo2 on .md extensions?
+  autocmd BufRead,BufNewFile *.md,*.mkd,*.markdown set filetype=markdown         " by default vim7.4 uses modulo2 on .md extensions?
   autocmd BufRead,BufNewFile *.pp set filetype=puppet
-  "autocmd FileType markdown
-  "\ setlocal colorcolumn=81 |
-  "\ setlocal formatoptions=ant |    " see :help fo-table
-  "\ setlocal wrap |
-  "\ setlocal spell
+  autocmd FileType markdown
+        \ setlocal colorcolumn=81 |
+        \ setlocal textwidth=80 |
+        \ setlocal formatoptions=ant |    " see :help fo-table
+        \ setlocal wrapmargin=0 |
+        \ setlocal spell spelllang=en_nz
   autocmd FileType python
         \ setlocal shiftwidth=4 |
         \ setlocal softtabstop=4 |
