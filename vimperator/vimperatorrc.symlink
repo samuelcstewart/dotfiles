@@ -26,6 +26,9 @@ set focuscontent
 " show tabbar only
 set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
 
+" set editor to gvim
+set editor="gvim -f"
+
 " needs the 'No Close Button' Firefox addon - preference was removed in Firefox 31
 set! browser.tabs.closeButtons=2
 
@@ -37,6 +40,9 @@ noremap <C-h> gT
 noremap <C-l> gt
 noremap <C-S-h> :tabmove! -1<CR>
 noremap <C-S-l> :tabmove! +1<CR>
+
+" use leader + i to open editor for input fields
+inoremap <Leader>i <C-i>
 
 " reload config
 noremap <Leader>r :source ~/.vimperatorrc<CR>
