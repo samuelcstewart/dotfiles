@@ -194,10 +194,15 @@ nnoremap <Leader>dw :%s/\s\+$//e<CR>            " Delete all trailing whitespace
 match TrailingWhiteSpace /\s\+$/                " Match trailing whitespace
 
 " Folding
+let g:vim_markdown_folding_disabled = 1
 
-" Space to toggle folds.
 nnoremap <Space> za
 vnoremap <Space> za
+
+noremap  <buffer> <silent> k gk
+noremap  <buffer> <silent> j gj
+noremap  <buffer> <silent> 0 g0
+noremap  <buffer> <silent> $ g$
 
 " Indent guides
 "let g:indent_guides_auto_colors=0
@@ -216,9 +221,7 @@ augroup augroup_filetypes
   autocmd BufRead,BufNewFile *.md,*.mkd,*.markdown set filetype=markdown         " by default vim7.4 uses modulo2 on .md extensions?
   autocmd BufRead,BufNewFile *.pp set filetype=puppet
   autocmd FileType markdown
-        \ setlocal colorcolumn=81 |
-        \ setlocal textwidth=80 |
-        \ setlocal formatoptions=ant |    " see :help fo-table
+        \ setlocal nolinebreak |
         \ setlocal wrapmargin=0 |
         \ setlocal spell spelllang=en_nz
   autocmd FileType python
