@@ -77,7 +77,10 @@ if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
-syntax on
+
+
+" colorscheme bg doesn't override transparency
+hi Normal guibg=NONE ctermbg=NONE
 
 " Spaces, tabs and indentation.
 set shiftwidth=2    " how many columns indented with << >> operations

@@ -17,7 +17,7 @@ set $mod Mod4
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Terminess\ Powerline 8
+font pango:Terminess Powerline 8
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -26,11 +26,14 @@ font pango:Terminess\ Powerline 8
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
+gaps inner 4
+gaps outer 2
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Return exec xfce4-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -208,22 +211,25 @@ for_window [class="Transmission-gtk"] floating enable
 for_window [class="Eclipse" title="Eclipse Marketplace"] floating enable
 for_window [class="Enpass-Desktop"] floating enable
 
+exec --no-startup-id xrandr --output HDMI1 --auto --left-of HDMI2
+exec --no-startup-id compton
+
 # Start the gnome settings daemon to make life easy.
-exec --no-startup-id dconf write /org/gnome/settings-daemon/plugins/cursor/active false
-exec --no-startup-id /usr/libexec/gnome-settings-daemon-localeexec
+#exec --no-startup-id dconf write /org/gnome/settings-daemon/plugins/cursor/active false
+#exec --no-startup-id /usr/libexec/gnome-settings-daemon-localeexec
 #exec --no-startup-id gnome-keyring-daemon --start --components=pkcs11,gpg,secrets
-exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
-exec --no-startup-id dunst -conf .dunstrc
+#exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+#exec --no-startup-id dunst -conf .dunstrc
 
 # Start some apps on workspaces
-exec --no-startup-id i3-msg 'workspace 1:term; exec gnome-terminal'
-exec --no-startup-id i3-msg 'workspace 2:www; exec firefox'
-exec --no-startup-id i3-msg 'workspace 2:www; exec firefox -no-remote -p mail'
-exec --no-startup-id i3-msg 'workspace 4:chat; exec /opt/mattermost-desktop/Mattermost; exec pidgin'
+#exec --no-startup-id i3-msg 'workspace 1:term; exec gnome-terminal'
+#exec --no-startup-id i3-msg 'workspace 2:www; exec firefox'
+#exec --no-startup-id i3-msg 'workspace 2:www; exec firefox -no-remote -p mail'
+#exec --no-startup-id i3-msg 'workspace 4:chat; exec /opt/mattermost-desktop/Mattermost; exec pidgin'
 # exec --no-startup-id i3-msg 'workspace 8:virt; exec vboxmanage startvm Win10 --type sdl; sh -c "sleep 5"'
 
-exec --no-startup-id feh --bg-scale /home/samuel/Pictures/i3back.png
-exec --no-startup-id dropbox start
+exec --no-startup-id feh --bg-scale /home/sam/Pictures/i3back.jpg
+#exec --no-startup-id dropbox start
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% #increase sound volume
