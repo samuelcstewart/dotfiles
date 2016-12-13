@@ -43,6 +43,9 @@ setopt inc_append_history_time # history is added incrementally rather than on s
 setopt auto_pushd              # push directories to dir stack
 setopt pushd_minus             # invert meanings of + and - when working with dir stack
 setopt pushd_silent            # do not print dir stack of pushd/popd
+setopt pushd_to_home
+setopt pushd_ignore_dups
+DIRSTACKSIZE=20
 
 zstyle ':completion:*' menu select
 
