@@ -237,3 +237,7 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
+" -------------- Polyglot --------------- "
+"  This plugin contains several language packs
+
+let g:vim_markdown_folding_disabled = 1   " do not autofold markdow
