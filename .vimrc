@@ -117,13 +117,7 @@ set splitright
 set incsearch       " show where search pattern matches, as typed so far
 set hlsearch        " highlight search matches
 
-
-" Case sensitivity
-"
-" ignore case turns off case sensitivity in pattern matching. Smart case
-" matches all patterns if the string is all lowercase. If the string contains
-" upper case characters, it will perform a case sensitive search.
-" Use \c and \C to override, insensitive/sensitive respectively.
+" Search case sensitivity
 set ignorecase
 set smartcase
 
@@ -187,15 +181,14 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" Whitespace
+" Strip Whitespace
 nnoremap <leader>sw :%s/\s\+$//<cr>:let @/=''<CR>
 
-" Folding
-let g:vim_markdown_folding_disabled = 1
-
+" Fold toggling
 nnoremap <Space> za
 vnoremap <Space> za
 
+" easily navigate split lines
 noremap  <buffer> <silent> k gk
 noremap  <buffer> <silent> j gj
 
