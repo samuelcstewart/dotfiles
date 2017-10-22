@@ -177,11 +177,6 @@ let mapleader=","   " change default \ leader to ,
 " Clear search highlights
 nnoremap <leader><space> :nohlsearch<CR> " clear search highlighting
 
-" Key mappings for CtrlP. Use secondary keystroke to open certain mode.
-nnoremap <C-p>f :CtrlP <CR>                   " Open CtrlP in File mode
-nnoremap <C-p>b :CtrlPBuffer <CR>             " Open CtrlP in Buffer mode
-nnoremap <C-p>t :CtrlPTag <CR>                " Open CtrlP in Tag mode
-
 " Buffer prev/next
 nnoremap <C-x> :bnext<CR>
 nnoremap <C-z> :bprev<CR>
