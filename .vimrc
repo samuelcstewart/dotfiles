@@ -21,25 +21,25 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Colours
-Plug 'chriskempson/base16-vim'
+" Plug 'chriskempson/base16-vim'
+Plug 'dracula/vim'
 
 " Status line
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Syntastic
-Plug 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
 
 " Git utils
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " Snippets
-Plug 'sirver/ultisnips'
+" Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
 
-" Vim surround. Repeat.vim to allow repition of surround shortcuts with dot
-" operator
+" Vim surround. Repeat.vim allows repition of surround shortcuts with .
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 
@@ -53,19 +53,13 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 
 " Polyglot syntax/indentation files for many languages
-Plug 'sheerun/vim-polyglot'
-
-" Go!
-Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
+Plug 'sheerun/vim-polyglot', { 'for': 'go', 'do': ':GoInstallBinaries' }
 
 " Render markdown live in browser. See GitHub for further setup instructions
-Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
+" Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
 
 " Easy comments
 Plug 'scrooloose/nerdcommenter'
-
-" Markdown extensions
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
 call plug#end()
 
@@ -73,11 +67,12 @@ call plug#end()
 filetype plugin indent on
 
 " Colours
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
+color dracula
 
+"if filereadable(expand("~/.vimrc_background"))
+  "let base16colorspace=256
+  "source ~/.vimrc_background
+"endif
 
 " colorscheme bg doesn't override transparency
 hi Normal guibg=NONE ctermbg=NONE
@@ -151,8 +146,7 @@ set termencoding=utf-8
 set encoding=utf-8
 set backspace=indent,eol,start  " backspace over everything
 
-" Vim uses only uses swap files on unix, and not when using sudo. Maintain these in
-" their own directory. Create directory if it doesn't exist. If not unix, no swapfiles.
+" Vim only uses swap files on unix, and not when using sudo. Maintain these in their own directory.
 if !strlen($SUDO_USER) && has('unix')
   set swapfile
   set directory^=~/.vim/swap/

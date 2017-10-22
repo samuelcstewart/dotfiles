@@ -1,4 +1,0 @@
-# Vi bindings (all readline programs)
-set editing-mode vi
-# Add a vi-mode indicator to prompt (4.3+)
-set show-mode-in-prompt on

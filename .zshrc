@@ -9,8 +9,7 @@ zplug "plugins/vi-mode",           from:oh-my-zsh
 zplug "plugins/docker",            from:oh-my-zsh
 zplug "plugins/docker-compose",    from:oh-my-zsh
 zplug "mafredri/zsh-async"
-zplug "sindresorhus/pure"
-zplug "olivierverdier/zsh-git-prompt", as:plugin, use:"zshrc.sh"
+zplug "sindresorhus/pure", use:pure.zsh
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting", nice:10
@@ -64,8 +63,8 @@ bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
 # Base16 Shell. Use base16_ to change colorschemes dynamically.
-BASE16_SHELL=$HOME/dotfiles/shell/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+# BASE16_SHELL=$HOME/dotfiles/shell/base16-shell/
+# [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 # Attach to an existing deattached tmux session, or start a new one
 #if [[ -z "$TMUX" ]] ;then
@@ -85,5 +84,13 @@ fi
 bindkey -v
 export KEYTIMEOUT=1
 
+export GOPATH=$HOME/go
+
 # aliases
 source $HOME/.aliases
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc' ]; then source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc' ]; then source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'; fi

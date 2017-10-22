@@ -1,0 +1,72 @@
+[alias]
+  # View the current working tree status using the short format
+	s = status -s
+
+  # Show the diff between the latest commit and the current state
+	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+
+  # View abbreviated SHA, description, and history graph of the latest 20 commits
+	l = log --oneline -n 20 --graph
+
+  # Pull in remote changes for the current repository and all its submodules
+	p = !"git pull; git submodule foreach git pull origin master"
+
+  # Clone a repository including all submodules
+	c = clone --recursive
+
+  # Color graph log view
+	graph = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
+
+  # Show verbose output about tags, branches or remotes
+	tags = tag -l
+	branches = branch -a
+	remotes = remote -v
+
+  # Amend the currently staged files to the latest commit
+	amend = commit --amend --reuse-message=HEAD
+
+  # from trevor bramble https://twitter.com/TrevorBramble/status/774292970681937920
+	alias=!git config -l | grep ^alias | cut -c 7- | sort
+
+[push]
+  default = simple
+
+[help]
+	# Automatically correct and execute mistyped commands
+	autocorrect = 1
+
+[filter "lfs"]
+  required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+
+[core]
+  excludesfile = ~/.gitignore
+  attributesfile = ~/.gitattributes
+
+  whitespace = space-before-tab,trailing-space
+
+  # Make `git rebase` safer on OS X
+	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+	trustctime = false
+	editor = $EDITOR
+
+[mergetool "fugitive"]
+	cmd = nvim -f -c \"Gvdiff\" \"$MERGED\"
+
+[merge]
+  # summaries of merged commits in newly created merge commit messages
+	log = true
+
+	tool = fugitive
+
+[color]
+  ui = true
+  diff = true
+  status = true
+  branch = true
+  interactive = true
+[user]
+	name = Samuel Stewart
+	email = samuelcstewart@icloud.com
