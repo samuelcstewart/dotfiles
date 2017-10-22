@@ -84,6 +84,7 @@ set tabstop=2       " number of spaces inserted on tab with noexpandtab set
 set expandtab       " spaces inserted instead of tab character
 set autoindent      " Copy indent of last line on new line
 set shiftround      " round indent to multiple of shiftwidth
+set smarttab        " insert blanks when used infront of line
 
 " UI
 set number          " show line numbers
@@ -93,14 +94,14 @@ set wildmenu        " visual autocomplete menu
 set showmatch       " highlight matching parenthesis etc
 set mouse=a         " enable mouse in all modes where supported
 set laststatus=2    " always display status line in all windows
-set noshowmode      " hide default mode text --INSERT-- Shows in Powerline
+set noshowmode      " hide default mode indicator
 set nrformats=		  " treat all numbers as decimal, not octal
 set scrolloff=10    " always display 10 lines above and below cursor
 set ruler           " show line number in status bar
 "set clipboard=unnamed
 
 " Use unix file format by default
-set fileformat=unix
+set fileformats=unix,dos,mac
 
 " Allow navigation away from changed buffers without bang
 set hidden
@@ -122,6 +123,10 @@ set hlsearch        " highlight search matches
 " Use \c and \C to override, insensitive/sensitive respectively.
 set ignorecase
 set smartcase
+
+" open help vertically
+command! -nargs=* -complete=help Help vertical belowright help <args>
+autocmd FileType help wincmd L
 
 " Syntastic
 "let g:syntastic_cpp_compiler = 'clang++'
@@ -174,6 +179,10 @@ nnoremap <C-p>f :CtrlP <CR>                   " Open CtrlP in File mode
 nnoremap <C-p>b :CtrlPBuffer <CR>             " Open CtrlP in Buffer mode
 nnoremap <C-p>t :CtrlPTag <CR>                " Open CtrlP in Tag mode
 
+" Buffer prev/next
+nnoremap <C-x> :bnext<CR>
+nnoremap <C-z> :bprev<CR>
+
 " Easy split navigation (normal mode only)
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
@@ -198,14 +207,17 @@ vnoremap <Space> za
 
 noremap  <buffer> <silent> k gk
 noremap  <buffer> <silent> j gj
-noremap  <buffer> <silent> 0 g0
-noremap  <buffer> <silent> $ g$
+" noremap  <buffer> <silent> 0 g0
+" noremap  <buffer> <silent> $ g$
+
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
 
 " Indent guides
 "let g:indent_guides_auto_colors=0
 
 " When in insert mode, matches all trailing whitespace not at the end of the current line
-" Stops annoying highlights when spacing and tabbing at the end of the current line.
+" Stops annoying highlights when inserting whitespace at end of current line.
 augroup augroup_whitespace
   autocmd!
   autocmd InsertEnter * match TrailingWhiteSpace /\s\+\%#\@<!$/
