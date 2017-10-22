@@ -61,6 +61,9 @@ Plug 'sheerun/vim-polyglot', { 'for': 'go', 'do': ':GoInstallBinaries' }
 " Easy comments
 Plug 'scrooloose/nerdcommenter'
 
+" Better whitespace
+Plug 'ntpeters/vim-better-whitespace'
+
 call plug#end()
 
 " Load plugins and indentation for file types
@@ -189,15 +192,8 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" UltiSnips triggers
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
 " Whitespace
-highlight TrailingWhiteSpace ctermbg=19 guibg=#4f5b66
-nnoremap <Leader>dw :%s/\s\+$//e<CR>            " Delete all trailing whitespace in current buffer
-match TrailingWhiteSpace /\s\+$/                " Match trailing whitespace
+nnoremap <leader>sw :%s/\s\+$//<cr>:let @/=''<CR>
 
 " Folding
 let g:vim_markdown_folding_disabled = 1
@@ -207,22 +203,9 @@ vnoremap <Space> za
 
 noremap  <buffer> <silent> k gk
 noremap  <buffer> <silent> j gj
-" noremap  <buffer> <silent> 0 g0
-" noremap  <buffer> <silent> $ g$
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
-
-" Indent guides
-"let g:indent_guides_auto_colors=0
-
-" When in insert mode, matches all trailing whitespace not at the end of the current line
-" Stops annoying highlights when inserting whitespace at end of current line.
-augroup augroup_whitespace
-  autocmd!
-  autocmd InsertEnter * match TrailingWhiteSpace /\s\+\%#\@<!$/
-  autocmd InsertLeave * match TrailingWhiteSpace /\s\+$/
-augroup END
 
 " Auto command group for setting options per filetype
 augroup augroup_filetypes
@@ -248,3 +231,21 @@ augroup augroup_filetypes
         \ setlocal expandtab |
         \ setlocal autoindent
 augroup END
+
+" ----------------------------- "
+" Plugin configuration
+" ----------------------------- "
+
+" ---------------- CtrlP ----------------- "
+
+" ---------- Better Whitespace ----------- "
+
+let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
+autocmd BufWritePre * StripWhitespace
+
+" ------------- UltiSnips ---------------- "
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
