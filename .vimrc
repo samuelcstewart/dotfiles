@@ -156,10 +156,6 @@ endif
 " Repeat timeout to half a second
 set timeoutlen=500
 
-" ----------------------------- "
-"  Key mappings
-" ----------------------------- "
-
 " Leader
 let mapleader=","   " change default \ leader to ,
 
