@@ -222,12 +222,10 @@ augroup END
 " ---------------- CtrlP ----------------- "
 
 " ---------- Better Whitespace ----------- "
-
 let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
 autocmd BufWritePre * StripWhitespace
 
 " ------------- UltiSnips ---------------- "
-
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
@@ -241,5 +239,10 @@ let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libc++'
 
 " -------------- Airline ---------------- "
-
 let g:airline_powerline_fonts=1                   " use patched powerline fonts (flash symbols)
+
+" ------------- Fugitive ---------------- "
+nnoremap <leader>ga :Git add %:p<CR><CR>
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gp :Gpush<CR>
+vnoremap <leader>gb :Gblame<CR>
