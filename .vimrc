@@ -125,13 +125,6 @@ set smartcase
 command! -nargs=* -complete=help Help vertical belowright help <args>
 autocmd FileType help wincmd L
 
-" Syntastic
-"let g:syntastic_cpp_compiler = 'clang++'
-"let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libc++'
-
-" Airline
-let g:airline_powerline_fonts=1                   " use patched powerline fonts (flash symbols)
-
 " Translate frequently typoed commands
 command! -bang -complete=file -nargs=? E e<bang> <args>
 command! -bang -complete=file -nargs=? W w<bang> <args>
@@ -163,7 +156,9 @@ endif
 " Repeat timeout to half a second
 set timeoutlen=500
 
-"""" Key mappings
+" ----------------------------- "
+"  Key mappings
+" ----------------------------- "
 
 " Leader
 let mapleader=","   " change default \ leader to ,
@@ -238,6 +233,13 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " -------------- Polyglot --------------- "
-"  This plugin contains several language packs
 
 let g:vim_markdown_folding_disabled = 1   " do not autofold markdow
+
+" ------------- Syntastic --------------- "
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libc++'
+
+" -------------- Airline ---------------- "
+
+let g:airline_powerline_fonts=1                   " use patched powerline fonts (flash symbols)
