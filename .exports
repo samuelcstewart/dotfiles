@@ -10,4 +10,9 @@ export LC_ALL="en_NZ.UTF-8";
 # Don’t clear the screen after quitting a manual page
 export MANPAGER="less -X";
 
-export TZ='Pacific/Auckland'; export TZ
+export TZ='Pacific/Auckland';
+
+# go path
+export GOPATH="${HOME}/go"
+
+export PATH=$PATH:${GOPATH}/bin
