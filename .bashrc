@@ -72,3 +72,4 @@ if type fortune &>/dev/null; then
   fortune
 fi
 
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
