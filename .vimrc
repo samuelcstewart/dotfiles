@@ -22,7 +22,8 @@ call plug#begin('~/.vim/plugged')
 
 " Colours
 " Plug 'chriskempson/base16-vim'
-Plug 'dracula/vim'
+" Plug 'dracula/vim'
+Plug 'arcticicestudio/nord-vim'
 
 " Status line
 Plug 'vim-airline/vim-airline'
@@ -79,7 +80,7 @@ call plug#end()
 filetype plugin indent on
 
 " Colours
-color dracula
+colorscheme nord
 
 "if filereadable(expand("~/.vimrc_background"))
   "let base16colorspace=256
