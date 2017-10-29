@@ -48,7 +48,11 @@ Plug 'tpope/vim-repeat'
 Plug 'godlygeek/tabular'
 
 " CtrlP fuzzy file/buffer/tag finder
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
+
+" fzf
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Indentation guides
 Plug 'nathanaelkane/vim-indent-guides'
