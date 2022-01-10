@@ -1,10 +1,5 @@
 set nocompatible
 
-" when using fish, tell vim to use sh.
-if &shell =~# 'fish$'
-  set shell=sh
-endif
-
 filetype off
 
 " --------------------------------------------------------------- "
@@ -21,8 +16,6 @@ endif
 call plug#begin('~/.vim/plugged')
 
 " Colours
-" Plug 'chriskempson/base16-vim'
-" Plug 'dracula/vim'
 Plug 'arcticicestudio/nord-vim'
 
 " Status line
@@ -38,7 +31,9 @@ Plug 'airblade/vim-gitgutter'
 
 " Snippets
 Plug 'sirver/ultisnips'
-Plug 'honza/vim-snippets'
+
+Plug 'andrewstuart/vim-kubernetes'
+"Plug 'honza/vim-snippets'
 
 " Vim surround. Repeat.vim allows repition of surround shortcuts with .
 Plug 'tpope/vim-surround'
@@ -47,30 +42,17 @@ Plug 'tpope/vim-repeat'
 " Tabular - line up arbritary text
 Plug 'godlygeek/tabular'
 
-" CtrlP fuzzy file/buffer/tag finder
-" Plug 'ctrlpvim/ctrlp.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+" vim-easy-align supplment tabular
+Plug 'junegunn/vim-easy-align'
+
 " Indentation guides
 Plug 'nathanaelkane/vim-indent-guides'
-
-" Polyglot syntax/indentation files for many languages
-Plug 'sheerun/vim-polyglot'
-
-" Vim-go
-Plug 'fatih/vim-go', { 'for': 'go', 'do': ':GoInstallBinaries' }
-
-" deoplete
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'zchee/deoplete-go', { 'do': 'make'}
-endif
-
-" Render markdown live in browser. See GitHub for further setup instructions
-" Plug 'suan/vim-instant-markdown', { 'for': 'markdown' }
 
 " Easy comments
 Plug 'scrooloose/nerdcommenter'
@@ -85,14 +67,6 @@ filetype plugin indent on
 
 " Colours
 colorscheme nord
-
-"if filereadable(expand("~/.vimrc_background"))
-  "let base16colorspace=256
-  "source ~/.vimrc_background
-"endif
-
-" colorscheme bg doesn't override transparency
-hi Normal guibg=NONE ctermbg=NONE
 
 " Spaces, tabs and indentation.
 set shiftwidth=2    " how many columns indented with << >> operations
@@ -204,12 +178,13 @@ cmap w!! w !sudo tee > /dev/null %
 "  Filetype
 " ---------------------------------- "
 
-au BufRead,BufNewFile *.pp set filetype=puppet
 au BufRead,BufNewFile *.md,*.mkd,*.markdown set filetype=markdown
 
 au FileType go setlocal noet ts=4 sw=4 sts=4
 au FileType markdown setlocal et ts=2 sw=2 nolinebreak wrapmargin=0 spell spelllang=en_nz
 au FileType python setlocal et sts=4 ts=8 sw=4 textwidth=79 autoindent colorcolumn=80
+
+au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 
 " ----------------------------- "
 " Plugin configuration
@@ -226,8 +201,9 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
+
 " -------------- Polyglot --------------- "
-let g:vim_markdown_folding_disabled = 1   " do not autofold markdow
+" let g:vim_markdown_folding_disabled = 1   " do not autofold markdow
 
 " ------------- Syntastic --------------- "
 let g:syntastic_cpp_compiler = 'clang++'
@@ -238,9 +214,9 @@ let g:airline_powerline_fonts=1                   " use patched powerline fonts 
 
 " ------------- Fugitive ---------------- "
 nnoremap <leader>ga :Git add %:p<CR><CR>
-nnoremap <leader>gs :Gstatus<CR>
-nnoremap <leader>gp :Gpush<CR>
-vnoremap <leader>gb :Gblame<CR>
+nnoremap <leader>gs :Git<CR>
+nnoremap <leader>gp :Git Push<CR>
+vnoremap <leader>gb :Git Blame<CR>
 
 " -------------- Vim-Go ----------------- "
 let g:go_fmt_fail_silently = 0
@@ -254,8 +230,3 @@ let g:go_highlight_trailing_whitespace_error = 0
 let g:go_highlight_extra_types = 0
 let g:go_highlight_operators = 0
 let g:go_highlight_build_constraints = 1
-
-" -------------- Deoplete -------------- "
-if has('nvim')
-  let g:deoplete#enable_at_startup = 1
-endif

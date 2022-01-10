@@ -1,19 +1,29 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 #
 [[ $- != *i* ]] && return
 
-source ~/.zplug/init.zsh
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
 
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/history",           from:oh-my-zsh
 zplug "plugins/vi-mode",           from:oh-my-zsh
 zplug "plugins/docker",            from:oh-my-zsh
 zplug "plugins/docker-compose",    from:oh-my-zsh
+zplug "plugins/kubectl",           from:oh-my-zsh
 zplug "mafredri/zsh-async"
-zplug "sindresorhus/pure", use:pure.zsh
+zplug "romkatv/powerlevel10k",     as:theme, depth:1
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-syntax-highlighting", nice:10
-zplug "plugins/history-substring-search", nice:10, from:oh-my-zsh
+zplug "zsh-users/zsh-syntax-highlighting",  defer:2
+zplug "plugins/history-substring-search",   defer:2, from:oh-my-zsh
+zplug "johanhaleby/kubetail"
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -25,10 +35,12 @@ fi
 
 zplug load
 
+export CLICOLOR=1
+
 # HISTORY #
 HISTFILE=~/.zsh_history
-HISTSIZE=50000
-SAVEHIST=50000
+HISTSIZE=1000000000
+SAVEHIST=1000000000
 setopt share_history
 setopt append_history          # sessions append to history file, rather then replace it.
 setopt extended_history        # saves timestamps to history
@@ -75,6 +87,13 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
     #tmux attach-session -t "$ID" # if available attach to it
   #fi
 #fi
+# ~/.extra can be used for other settings you don’t want to commit.
+for file in ~/.{bash_prompt,aliases,functions,exports,extra}; do
+  if [[ -r "$file" ]] && [[ -f "$file" ]]; then
+    source "$file"
+  fi
+done
+unset file
 
 if type fortune &>/dev/null; then
   fortune
@@ -84,15 +103,13 @@ fi
 bindkey -v
 export KEYTIMEOUT=1
 
-export GOPATH=$HOME/go
-
 # aliases
 source $HOME/.aliases
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc' ]; then source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc' ]; then source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'; fi
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
+export PATH="/usr/local/opt/node@14/bin:$PATH"
+export PATH="/usr/local/opt/openssl@3/bin:$PATH"

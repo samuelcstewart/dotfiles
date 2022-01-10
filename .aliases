@@ -8,3 +8,7 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
+
+alias kns=kubens
+alias kctx=kubectx
+alias kt=kubetail
