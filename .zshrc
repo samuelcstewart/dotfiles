@@ -12,7 +12,6 @@ export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
 zplug "plugins/command-not-found", from:oh-my-zsh
-zplug "plugins/history",           from:oh-my-zsh
 zplug "plugins/vi-mode",           from:oh-my-zsh
 zplug "plugins/docker",            from:oh-my-zsh
 zplug "plugins/docker-compose",    from:oh-my-zsh
@@ -34,8 +33,6 @@ if ! zplug check --verbose; then
 fi
 
 zplug load
-
-export CLICOLOR=1
 
 # HISTORY #
 HISTFILE=~/.zsh_history
@@ -95,10 +92,6 @@ for file in ~/.{bash_prompt,aliases,functions,exports,extra}; do
 done
 unset file
 
-if type fortune &>/dev/null; then
-  fortune
-fi
-
 # VI
 bindkey -v
 export KEYTIMEOUT=1
@@ -110,6 +103,6 @@ source $HOME/.aliases
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-export PATH="/usr/local/opt/openjdk@11/bin:$PATH"
-export PATH="/usr/local/opt/node@14/bin:$PATH"
-export PATH="/usr/local/opt/openssl@3/bin:$PATH"
+
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"

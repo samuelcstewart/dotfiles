@@ -3,6 +3,8 @@
 
 export XDG_CONFIG_HOME=$HOME/.config
 
+export CLICOLOR=1
+
 export EDITOR=vim;
 
 # Prefer US English and use UTF-8

@@ -54,3 +54,6 @@ Session.vim
 
 # dotfiles
 .cfg
+
+# jenv
+.java-version

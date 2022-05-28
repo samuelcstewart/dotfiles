@@ -1,3 +1,7 @@
+[user]
+	name = Sam C Stewart
+	email = sam_c_stewart@bnz.co.nz
+
 [alias]
   # View the current working tree status using the short format
 	s = status -s
@@ -58,7 +62,6 @@
 [merge]
   # summaries of merged commits in newly created merge commit messages
 	log = true
-
 	tool = fugitive
 
 [color]
@@ -67,6 +70,3 @@
   status = true
   branch = true
   interactive = true
-[user]
-	name = Samuel Stewart
-	email = samuelcstewart@icloud.com
