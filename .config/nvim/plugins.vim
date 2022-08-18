@@ -45,4 +45,6 @@ Plug 'Yggdroot/indentLine'
 " Easy tmux/vim splits navigation
 Plug 'christoomey/vim-tmux-navigator'
 
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
 call plug#end()
