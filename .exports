@@ -15,8 +15,9 @@ export LC_ALL="en_NZ.UTF-8";
 export MANPAGER="less -X";
 
 export TZ='Pacific/Auckland';
+export FZF_DEFAULT_COMMAND='rg --files'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # go path
 export GOPATH="${HOME}/go"
-
 export PATH=$PATH:${GOPATH}/bin
