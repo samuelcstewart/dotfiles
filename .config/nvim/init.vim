@@ -138,7 +138,9 @@ au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 " Plugin configuration
 " ----------------------------- "
 
-" ---------------- CtrlP ----------------- "
+" ---------------- IndentLine ----------------- "
+" Disable quote concealing in JSON files
+let g:vim_json_conceal=0
 
 " ---------- Better Whitespace ----------- "
 let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
