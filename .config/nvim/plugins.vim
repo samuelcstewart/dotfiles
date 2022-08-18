@@ -6,10 +6,11 @@ call plug#begin()
 
 " Colours
 " Plug 'mhartington/oceanic-next'
-Plug 'sainnhe/everforest'
+" Plug 'sainnhe/everforest'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
 " Stable version of coc
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Status lne and icons
 Plug 'nvim-lualine/lualine.nvim'

@@ -12,9 +12,9 @@ if (has("termguicolors"))
 endif
 
 syntax enable
-set background=dark
-let g:everforest_background='hard'
-colorscheme everforest
+"set background=dark
+let g:tokyonight_style='night'
+colorscheme tokyonight
 
 " Spaces, tabs and indentation.
 set shiftwidth=2    " how many columns indented with << >> operations
@@ -152,7 +152,7 @@ autocmd BufWritePre * StripWhitespace
 lua << END
   require('lualine').setup()
   options = {
-    theme = 'everforest'
+    theme = 'tokyonight'
   }
 END
 
