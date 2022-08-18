@@ -27,10 +27,6 @@ Plug 'tpope/vim-repeat'
 " Tabular - line up arbritary text
 Plug 'godlygeek/tabular'
 
-" fzf
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
 " vim-easy-align supplment tabular
 Plug 'junegunn/vim-easy-align'
 
@@ -46,5 +42,8 @@ Plug 'Yggdroot/indentLine'
 Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 
 call plug#end()

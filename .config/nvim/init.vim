@@ -134,13 +134,20 @@ au FileType python setlocal et sts=4 ts=8 sw=4 textwidth=79 autoindent colorcolu
 
 au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 
+" ------------ Terminal ------------- "
+augroup nvim_term
+  autocmd!
+  " Enter Terminal-mode (insert) automatically
+  autocmd TermOpen * startinsert
+  " Disables number lines on terminal buffers
+  autocmd TermOpen * :set nonumber norelativenumber
+  " allows you to use Ctrl-c on terminal window
+  autocmd TermOpen * nnoremap <buffer> <C-c> i<C-c>
+augroup END
+
 " ----------------------------- "
 " Plugin configuration
 " ----------------------------- "
-
-" ---------------- IndentLine ----------------- "
-" Disable quote concealing in JSON files
-let g:vim_json_conceal=0
 
 " ---------- Better Whitespace ----------- "
 let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
@@ -181,7 +188,8 @@ lua << END
       enable = true,
 
       -- list of language that will be disabled
-      -- disable = { "c", "rust" },
+      -- some conflict with indentline causing quotes to be concealed?
+      disable = { "json" },
 
       -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
       -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
@@ -191,3 +199,13 @@ lua << END
     },
   }
 END
+
+" ------------- Telescope ---------------- "
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" ---------------- IndentLine ----------------- "
+" Disable quote concealing in JSON files
+let g:vim_json_conceal=0
