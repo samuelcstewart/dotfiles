@@ -1,7 +1,7 @@
 set nocompatible
 filetype off
 source $HOME/.config/nvim/plugins.vim
-source $HOME/.config/nvim/coc.vim
+"source $HOME/.config/nvim/coc.vim
 
 " Load plugins and indentation for file types
 filetype plugin indent on

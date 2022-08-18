@@ -20,9 +20,6 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
-" Snippets
-"Plug 'sirver/ultisnips'
-
 " Vim surround. Repeat.vim allows repition of surround shortcuts with .
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
