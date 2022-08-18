@@ -39,11 +39,10 @@ Plug 'tpope/vim-commentary'
 
 Plug 'ntpeters/vim-better-whitespace'
 
-Plug 'andrewstuart/vim-kubernetes'
-
-" Generate colours for tmuxline based on vim colours
-Plug 'edkolev/tmuxline.vim'
-
 " Indentline
 Plug 'Yggdroot/indentLine'
+
+" Easy tmux/vim splits navigation
+Plug 'christoomey/vim-tmux-navigator'
+
 call plug#end()
