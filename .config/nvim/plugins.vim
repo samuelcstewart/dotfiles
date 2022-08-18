@@ -36,7 +36,8 @@ Plug 'tpope/vim-commentary'
 Plug 'ntpeters/vim-better-whitespace'
 
 " Indentline
-Plug 'Yggdroot/indentLine'
+" Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 " Easy tmux/vim splits navigation
 Plug 'christoomey/vim-tmux-navigator'

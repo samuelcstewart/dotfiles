@@ -207,5 +207,4 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " ---------------- IndentLine ----------------- "
-" Disable quote concealing in JSON files
-let g:vim_json_conceal=0
+let g:indentLine_char = '¦'
