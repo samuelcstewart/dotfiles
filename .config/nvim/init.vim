@@ -22,6 +22,7 @@ set softtabstop=2   " how many columns indented in insert mode
 set tabstop=2       " number of spaces inserted on tab with noexpandtab set
 set expandtab       " spaces inserted instead of tab character
 set autoindent      " Copy indent of last line on new line
+set smartindent
 set shiftround      " round indent to multiple of shiftwidth
 set smarttab        " insert blanks when used infront of line
 
@@ -37,6 +38,10 @@ set noshowmode      " hide default mode indicator
 set nrformats=		  " treat all numbers as decimal, not octal
 set scrolloff=10    " always display 10 lines above and below cursor
 set ruler           " show line number in status bar
+
+set autoread        " automatically reread changed files without prompt
+set noswapfile
+set nobackup
 
 " Use unix file format by default
 set fileformats=unix,dos,mac
@@ -75,18 +80,6 @@ command! -bang WA wa<bang>
 set termencoding=utf-8
 set encoding=utf-8
 set backspace=indent,eol,start  " backspace over everything
-
-" Vim only uses swap files on unix, and not when using sudo. Maintain these in their own directory.
-if !strlen($SUDO_USER) && has('unix')
-  set swapfile
-  set directory^=~/.vim/swap/
-  " Create swap directory if not exists
-  if !isdirectory($HOME . '/.vim/swap')
-    call mkdir($HOME . '/.vim/swap', 'p', 0700)
-  endif
-else
-  set noswapfile
-endif
 
 " Repeat timeout to half a second
 set timeoutlen=500
