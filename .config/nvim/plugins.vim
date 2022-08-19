@@ -1,4 +1,3 @@
-" --------------------------------------------------------------- "
 "  VIM PLUG: https://github.com/junegunn/vim-plug                 "
 " --------------------------------------------------------------- "
 
@@ -44,7 +43,16 @@ Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
+" Telescope and dependencies/extensions
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'cljoly/telescope-repo.nvim'
+Plug 'nvim-telescope/telescope-file-browser.nvim'
+
+Plug 'airblade/vim-rooter'
+
+Plug 'glepnir/dashboard-nvim'
+
+Plug 'nanozuki/tabby.nvim'
 
 call plug#end()

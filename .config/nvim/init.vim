@@ -150,7 +150,7 @@ augroup END
 " ----------------------------- "
 
 " ---------- Better Whitespace ----------- "
-let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown']
+let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'unite', 'qf', 'help', 'markdown', 'dashboard']
 autocmd BufWritePre * StripWhitespace
 
 " -------------- Lualine ---------------- "
@@ -203,8 +203,119 @@ END
 " ------------- Telescope ---------------- "
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fr <cmd>Telescope repo list<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>fe <cmd>Telescope file_browser<cr>
+
+lua << END
+  require('telescope').setup {
+    defaults = {
+      file_ignore_patterns = {
+        "^.git/",
+        ".DS_Store",
+      }
+    },
+    pickers = {
+      find_files = {
+        theme = 'dropdown',
+        find_command = { 'rg', '--ignore', '--hidden', '--files' }
+      },
+      live_grep = {
+        theme = 'dropdown',
+      },
+      buffers = {
+        theme = 'dropdown',
+      },
+      git_branches = {
+        theme = 'dropdown',
+      }
+    },
+    extensions = {
+      repo = {
+        theme = 'dropdown',
+        list = {
+          search_dirs = {
+            "~/git",
+          },
+        },
+      },
+      file_browser = {
+        theme = 'dropdown',
+        hijack_netrw = true
+      }
+    },
+  }
+  require('telescope').load_extension('repo')
+  require('telescope').load_extension('file_browser')
+END
 
 " ---------------- IndentLine ----------------- "
 let g:indentLine_char = '¦'
+
+" ---------------- VimRooter ----------------- "
+"  automatically change the window/tab working directory
+let g:rooter_cd_cmd = 'lcd'
+
+" ---------------- Tabby ----------------- "
+lua << EOF
+  require('tabby').setup {
+    tabline = require('tabby.presets').tab_only,
+  }
+EOF
+" ---------------- Dashboard ------------------- "
+lua << END
+  local db = require('dashboard')
+  db.custom_center = {
+    {
+       icon = ' ',
+       desc = 'Find File                      ',
+       action = 'Telescope find_files',
+       shortcut = 'SPC f f',
+    },
+    {
+       icon = ' ',
+       desc = 'Live Grep                      ',
+       action = 'Telescope live_grep',
+       shortcut = 'SPC f g',
+    },
+    {
+       icon = ' ',
+       desc = 'Open Repo                      ',
+       action = 'Telescope repo list',
+       shortcut = 'SPC f r',
+    },
+  }
+  db.custom_footer = {}
+  db.custom_header = {
+    \'                 ▄████████▄         ',
+    \'               ▄█▀▒▒▒▒▒▒▒▀██▄       ',
+    \'           ▄█▀▒▒▒▒▒▒▄▒▒▒▒▒▒▐█▌      ',
+    \'         ▄█▒▒▒▒▒▒▒▒▒▒▀█▒▒▒▄██       ',
+    \'       ▄█▒▒▒▒▒▒▒▒▒▒▒▒▒▒██▀▒▒▒█▄     ',
+    \'     ▄█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█▄   ',
+    \'     ▄█▒▒▒▄██████▄▒▒▒▒▄█████▄▒▒▒▒█  ',
+    \'     █▒▒▒█▀░░░░░▀█ ▒▒▒█▀░░░░▀█▒▒▒█  ',
+    \'     █▒▒▒█░░▄░░░░▀████▀░░░▄░░█▒▒▒█  ',
+    \'   ▄███▄▒█▄░▐▀▄░░░░░░░░░▄▀▌░▄█▒▒███▄',
+    \'   █▀░░█▄▒█░▐▐▀▀▄▄▄ ▄▄▄▀▀▌▌░█▒▒█░░▀█',
+    \'   █░░░░█▒█░▐▐  ▄▄ █ ▄▄  ▌▌░█▒█░░░░█',
+    \'   █░▄░░█▒█░▐▐▄ ▀▀ █ ▀▀ ▄▌▌░█▒█░░▄░█',
+    \'   █░░█░█▒█░░▌▄█▄▄▀ ▀▄▄█▄▐░░█▒█░█░░█',
+    \'   █▄░█████████▀░░▀▄▀░░▀█████████░▄█',
+    \'   ██▀░░▄▀░░▀░░▀▄░░░▄▀░░▀░░▀▄░░▀██  ',
+    \'   ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░██',
+    \'   █░▄░░░░░░░░░░░░░░░░░░░░░░░░░░░▄░█',
+    \'   █░▀█▄░░░░░░░░░░░░░░░░░░░░░░░▄█▀░█',
+    \'   █░░█▀███████████████████████▀█░░█',
+    \'   █░░█    █   █   █   █   █    █░░█',
+    \'   █░░░▀█▄▄█▄▄▄█▄▄▄█▄▄▄█▄▄▄█▄▄█▀░░░█',
+    \'   ▀█░░▀█▄█    █   █   █   █▄█▀░░░█▀  ',
+    \'    ▀█░░░▀▀█▄▄ █   █   █▄▄█▀▀░░░░█▀  ',
+    \'     ▀█░░░░░▀▀█████████▀▀░░░░░░█▀    ',
+    \'      ▀█░░░░░░░▄░░░░░░░▄░░░░░░█▀    ',
+    \'        ▀██▄░░░▀▀▀▀▀▀▀▀▀░░░▄██▀      ',
+    \'          ▀██▄▄░░░░░░░▄▄██▀        ',
+    \'             ▀▀███████▀▀            ',
+  }
+END
