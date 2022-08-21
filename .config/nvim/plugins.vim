@@ -17,7 +17,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 
 " Git utils
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+Plug 'lewis6991/gitsigns.nvim'
 
 " Vim surround. Repeat.vim allows repition of surround shortcuts with .
 Plug 'tpope/vim-surround'
