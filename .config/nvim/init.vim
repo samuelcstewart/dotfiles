@@ -328,6 +328,23 @@ lua << EOF
     tabline = require('tabby.presets').tab_only,
   }
 EOF
+
+" ---------------- yaml-ls ------------------- "
+lua << END
+  require('lspconfig').yamlls.setup {
+    settings = {
+      yaml = {
+        schemas = {
+          ["https://json.schemastore.org/kustomization.json"] = "kustomization.yaml",
+          ["Kubernetes"] = "/*.k8s.yaml",
+          ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "docker-compose.yaml",
+        },
+      },
+    }
+}
+END
+
+
 " ---------------- Dashboard ------------------- "
 lua << END
   local db = require('dashboard')

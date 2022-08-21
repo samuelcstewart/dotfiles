@@ -55,4 +55,8 @@ Plug 'glepnir/dashboard-nvim'
 
 Plug 'nanozuki/tabby.nvim'
 
+Plug 'neovim/nvim-lspconfig'
+
+" Completion
+
 call plug#end()
