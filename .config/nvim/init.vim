@@ -46,6 +46,9 @@ set nobackup
 " Use unix file format by default
 set fileformats=unix,dos,mac
 
+" Better completion
+set completeopt=menu,menuone,noselect
+
 " Allow navigation away from changed buffers without bang
 set hidden
 
@@ -323,11 +326,57 @@ END
 let g:rooter_cd_cmd = 'lcd'
 
 " ---------------- Tabby ----------------- "
-lua << EOF
+lua << END
   require('tabby').setup {
     tabline = require('tabby.presets').tab_only,
   }
-EOF
+END
+
+" ---------------- nvim-cmp ------------------- "
+lua << END
+  -- Setup nvim-cmp.
+  local cmp = require('cmp')
+
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+      end,
+    },
+    window = {
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'vsnip' },
+    }, {
+      { name = 'buffer' },
+    })
+  })
+END
+
+" ---------------- vsnip ------------------- "
+" Expand
+imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+
+" Expand or jump
+imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+
+" Jump forward or backward
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 
 " ---------------- yaml-ls ------------------- "
 lua << END
@@ -342,6 +391,11 @@ lua << END
       },
     }
 }
+END
+
+" ---------------- pyright-ls ------------------- "
+lua << END
+  require('lspconfig').pyright.setup{}
 END
 
 
