@@ -106,3 +106,5 @@ source $HOME/.aliases
 
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
+
+source $HOME/.docker/init-zsh.sh || true # Added by Docker Desktop

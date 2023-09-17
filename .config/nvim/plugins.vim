@@ -35,7 +35,6 @@ Plug 'tpope/vim-commentary'
 Plug 'ntpeters/vim-better-whitespace'
 
 " Indentline
-" Plug 'Yggdroot/indentLine'
 Plug 'lukas-reineke/indent-blankline.nvim'
 
 " Easy tmux/vim splits navigation
@@ -49,10 +48,12 @@ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'cljoly/telescope-repo.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 
+" sets the vim working directory to the project root
 Plug 'airblade/vim-rooter'
 
 Plug 'glepnir/dashboard-nvim'
 
+" tabline plugin
 Plug 'nanozuki/tabby.nvim'
 
 " lsp integration
@@ -67,5 +68,13 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'rafamadriz/friendly-snippets'
+
+Plug 'liuchengxu/vim-which-key'
+
+" lsp for helm
+Plug 'towolf/vim-helm'
+
+" yaml companion
+Plug 'someone-stole-my-name/yaml-companion.nvim'
 
 call plug#end()

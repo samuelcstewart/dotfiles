@@ -11,7 +11,7 @@ set -g pane-border-style "fg=#3b4261"
 set -g pane-active-border-style "fg=#7aa2f7"
 
 set -g status "on"
-set -g status-justify "left"
+set -g status-justify "centre"
 
 set -g status-style "fg=#7aa2f7,bg=#1f2335"
 

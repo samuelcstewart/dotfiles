@@ -70,3 +70,9 @@
   status = true
   branch = true
   interactive = true
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+[diff]
+	colorMoved = zebra

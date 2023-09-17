@@ -87,8 +87,11 @@ set backspace=indent,eol,start  " backspace over everything
 " Repeat timeout to half a second
 set timeoutlen=500
 
-" Leader
-let mapleader=","   " change default \ leader to ,
+" Leader & Whichkey
+let g:mapleader=","             " change default \ leader to ,
+nnoremap <silent> <leader>      :<c-u>WhichKey ','<CR>
+let g:which_key_map = {}
+call which_key#register(',', "g:which_key_map")
 
 " Clear search highlights
 nnoremap <leader><space> :nohlsearch<CR> " clear search highlighting
@@ -104,7 +107,7 @@ nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
 " Strip Whitespace
-nnoremap <leader>sw :%s/\s\+$//<cr>:let @/=''<CR>
+"nnoremap <leader>sw :%s/\s\+$//<cr>:let @/=''<CR>
 
 " Fold toggling
 nnoremap <Space> za
@@ -159,95 +162,15 @@ lua << END
 END
 
 " ------------- Fugitive ---------------- "
+let g:which_key_map.g = { 'name' : '+git' }
 nnoremap <leader>ga :Git add %:p<CR><CR>
+let g:which_key_map.g.a = 'add file'
 nnoremap <leader>gs :Git<CR>
+let g:which_key_map.g.s = 'status'
 nnoremap <leader>gp :Git push<CR>
+let g:which_key_map.g.p = 'push'
 vnoremap <leader>gb :Git blame<CR>
-
-" ------------- Treesitter ---------------- "
-lua << END
-  require('nvim-treesitter.configs').setup {
-    -- A list of parser names, or "all"
-    ensure_installed = { "json", "yaml", "dockerfile", "javascript", "markdown", "typescript", "python" },
-
-    -- Install parsers synchronously (only applied to `ensure_installed`)
-    sync_install = false,
-
-    -- Automatically install missing parsers when entering buffer
-    auto_install = true,
-
-    -- List of parsers to ignore installing (for "all")
-    ignore_install = { },
-
-    highlight = {
-      -- `false` will disable the whole extension
-      enable = true,
-
-      -- list of language that will be disabled
-      -- some conflict with indentline causing quotes to be concealed?
-      disable = { "json" },
-
-      -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-      -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-      -- Using this option may slow down your editor, and you may see some duplicate highlights.
-      -- Instead of true it can also be a list of languages
-      additional_vim_regex_highlighting = false,
-    },
-  }
-END
-
-" ------------- Telescope ---------------- "
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fr <cmd>Telescope repo list<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <leader>fe <cmd>Telescope file_browser<cr>
-
-lua << END
-  require('telescope').setup {
-    defaults = {
-      file_ignore_patterns = {
-        "^.git/",
-        ".DS_Store",
-      }
-    },
-    pickers = {
-      find_files = {
-        theme = 'dropdown',
-        find_command = { 'fd', '--type=f', '--ignore', '--hidden' } --
-      },
-      live_grep = {
-        theme = 'dropdown',
-      },
-      buffers = {
-        theme = 'dropdown',
-      },
-      git_branches = {
-        theme = 'dropdown',
-      }
-    },
-    extensions = {
-      repo = {
-        theme = 'dropdown',
-        list = {
-          search_dirs = {
-            "~/git",
-          },
-        },
-      },
-      file_browser = {
-        theme = 'dropdown',
-        hijack_netrw = true
-      }
-    },
-  }
-  require('telescope').load_extension('repo')
-  require('telescope').load_extension('file_browser')
-END
-
-" ---------------- IndentLine ----------------- "
-let g:indentLine_char = '¦'
+let g:which_key_map.g.b = 'blame'
 
 " ---------------- Git Signs ----------------- "
 lua << END
@@ -314,12 +237,124 @@ lua << END
 			end, {expr=true})
 
 			-- Actions
-			map('n', '<leader>gb', function() gs.blame_line{full=true} end)
-			map('n', '<leader>tb', gs.toggle_current_line_blame)
+			map('n', '<leader>gbb', function() gs.blame_line{full=true} end)
+			map('n', '<leader>gbt', gs.toggle_current_line_blame)
 			map('n', '<leader>gd', gs.diffthis)
+      map('v', '<leader>ghs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
+      map('v', '<leader>ghr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end)
 		end
   }
 END
+let g:which_key_map.g.b = { 'name' : '+blame' }
+let g:which_key_map.g.b.t = 'toggle'
+let g:which_key_map.g.b.b = 'blame'
+let g:which_key_map.g.d = 'diff this'
+let g:which_key_map.g.h = { 'name' : '+hunk' }
+let g:which_key_map.g.h.s = 'stage hunk (v)'
+let g:which_key_map.g.h.r = 'reset hunk (v)'
+
+" ------------- Treesitter ---------------- "
+lua << END
+  require('nvim-treesitter.configs').setup {
+    -- A list of parser names, or "all"
+    ensure_installed = { "json", "yaml", "dockerfile", "javascript", "markdown", "typescript", "python" },
+
+    -- Install parsers synchronously (only applied to `ensure_installed`)
+    sync_install = false,
+
+    -- Automatically install missing parsers when entering buffer
+    auto_install = true,
+
+    -- List of parsers to ignore installing (for "all")
+    ignore_install = { },
+
+    highlight = {
+      -- `false` will disable the whole extension
+      enable = true,
+
+      -- list of language that will be disabled
+      -- some conflict with indentline causing quotes to be concealed?
+      disable = { "json" },
+
+      -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+      -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+      -- Using this option may slow down your editor, and you may see some duplicate highlights.
+      -- Instead of true it can also be a list of languages
+      additional_vim_regex_highlighting = false,
+    },
+  }
+END
+
+" ------------- Telescope ---------------- "
+let g:which_key_map.f = { 'name' : '+telescope' }
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+let g:which_key_map.f.f = 'files'
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+let g:which_key_map.f.g = 'live grep'
+nnoremap <leader>fr <cmd>Telescope repo list layout_strategy=vertical<cr>
+let g:which_key_map.f.r = 'repos'
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+let g:which_key_map.f.b = 'buffers'
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+let g:which_key_map.f.h = 'help tags'
+nnoremap <leader>fe <cmd>Telescope file_browser<cr>
+let g:which_key_map.f.e = 'file explorer'
+nnoremap <leader>fy <cmd>Telescope yaml_schema<cr>
+let g:which_key_map.f.y = 'yaml schema'
+
+lua << END
+  require('telescope').setup {
+    defaults = {
+      layout_config = {
+       -- horizontal = { height = 0.5 },
+      },
+    },
+    pickers = {
+      find_files = {
+        theme = 'dropdown',
+        hidden = true,
+        no_ignore = false,
+      },
+      live_grep = {
+        theme = 'dropdown',
+      },
+      help_tags = {
+        theme = 'dropdown',
+      },
+      buffers = {
+        theme = 'dropdown',
+      },
+      git_branches = {
+        theme = 'dropdown',
+      },
+      git_files = {
+        theme = 'dropdown',
+      },
+    },
+    extensions = {
+      repo = {
+        list = {
+          fd_opts = {
+            '--no-ignore',
+          },
+          search_dirs = {
+            "~/git",
+          },
+        },
+      },
+      file_browser = {
+        theme = 'dropdown',
+        hijack_netrw = true
+      }
+    },
+  }
+  require('telescope').load_extension('repo')
+  require('telescope').load_extension('file_browser')
+  require('telescope').load_extension('yaml_schema')
+END
+
+" ---------------- IndentLine ----------------- "
+let g:indentLine_char = '¦'
 
 " ---------------- VimRooter ----------------- "
 "  automatically change the window/tab working directory
@@ -381,11 +416,15 @@ smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-T
 " ---------------- yaml-ls ------------------- "
 lua << END
   require('lspconfig').yamlls.setup {
+    on_attach = function(client, bufnr)
+      if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
+        vim.diagnostic.disable()
+      end
+    end,
     settings = {
       yaml = {
         schemas = {
           ["https://json.schemastore.org/kustomization.json"] = "kustomization.yaml",
-          ["Kubernetes"] = "/*.k8s.yaml",
           ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "docker-compose.yaml",
         },
       },
@@ -393,11 +432,48 @@ lua << END
 }
 END
 
+lua << END
+  local configs = require('lspconfig.configs')
+  local lspconfig = require('lspconfig')
+  local util = require('lspconfig.util')
+
+  if not configs.helm_ls then
+    configs.helm_ls = {
+      default_config = {
+        cmd = {"helm_ls", "serve"},
+        filetypes = {'helm'},
+        root_dir = function(fname)
+          return util.root_pattern('Chart.yaml')(fname)
+        end,
+      },
+    }
+  end
+
+  require('lspconfig').helm_ls.setup {
+    filetypes = {"helm"},
+    cmd = {"helm_ls", "serve"},
+  }
+END
+
+lua << END
+  local cfg = require("yaml-companion").setup({
+    -- Add any options here, or leave empty to use the default settings
+    -- lspconfig = {
+    --   cmd = {"yaml-language-server"}
+    -- },
+  })
+  require("lspconfig")["yamlls"].setup(cfg)
+END
+
 " ---------------- pyright-ls ------------------- "
 lua << END
   require('lspconfig').pyright.setup{}
 END
 
+" ---------------- ansible-ls ------------------- "
+lua << END
+  require('lspconfig').ansiblels.setup{}
+END
 
 " ---------------- Dashboard ------------------- "
 lua << END
@@ -407,19 +483,25 @@ lua << END
        icon = ' ',
        desc = 'Find File                      ',
        action = 'Telescope find_files',
-       shortcut = 'SPC f f',
+       shortcut = ', f f',
     },
     {
        icon = ' ',
        desc = 'Live Grep                      ',
        action = 'Telescope live_grep',
-       shortcut = 'SPC f g',
+       shortcut = ', f g',
     },
     {
        icon = ' ',
        desc = 'Open Repo                      ',
        action = 'Telescope repo list',
-       shortcut = 'SPC f r',
+       shortcut = ', f r',
+    },
+    {
+       icon = ' ',
+       desc = 'File Explorer                  ',
+       action = 'Telescope file_browser',
+       shortcut = ', f e',
     },
   }
   db.custom_footer = {}
