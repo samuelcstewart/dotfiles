@@ -4,12 +4,8 @@
 call plug#begin()
 
 " Colours
-" Plug 'mhartington/oceanic-next'
-" Plug 'sainnhe/everforest'
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
-
-" Stable version of coc
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neanias/everforest-nvim', { 'branch': 'main' }
+Plug 'rebelot/kanagawa.nvim'
 
 " Status lne and icons
 Plug 'nvim-lualine/lualine.nvim'
@@ -44,17 +40,19 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Telescope and dependencies/extensions
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.5' }
 Plug 'cljoly/telescope-repo.nvim'
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 
 " sets the vim working directory to the project root
 Plug 'airblade/vim-rooter'
 
-Plug 'glepnir/dashboard-nvim'
-
 " tabline plugin
 Plug 'nanozuki/tabby.nvim'
+
+" Utility for installing lsp packages
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 
 " lsp integration
 Plug 'neovim/nvim-lspconfig'
@@ -76,5 +74,7 @@ Plug 'towolf/vim-helm'
 
 " yaml companion
 Plug 'someone-stole-my-name/yaml-companion.nvim'
+
+Plug 'williamboman/mason.nvim'
 
 call plug#end()

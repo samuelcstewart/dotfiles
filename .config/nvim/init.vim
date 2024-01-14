@@ -1,7 +1,6 @@
 set nocompatible
 filetype off
 source $HOME/.config/nvim/plugins.vim
-"source $HOME/.config/nvim/coc.vim
 
 " Load plugins and indentation for file types
 filetype plugin indent on
@@ -12,9 +11,9 @@ if (has("termguicolors"))
 endif
 
 syntax enable
-"set background=dark
-let g:tokyonight_style='night'
-colorscheme tokyonight
+set background=dark
+"let g:everforest_better_performance = 1
+colorscheme kanagawa
 
 " Spaces, tabs and indentation.
 set shiftwidth=2    " how many columns indented with << >> operations
@@ -156,7 +155,7 @@ autocmd BufWritePre * StripWhitespace
 lua << END
   require('lualine').setup {
     options = {
-      theme = 'tokyonight'
+      theme = 'kanagawa'
     }
   }
 END
@@ -396,6 +395,11 @@ lua << END
       { name = 'buffer' },
     })
   })
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
+  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+  require('lspconfig').yamlls.setup {
+    capabilities = capabilities
+  }
 END
 
 " ---------------- vsnip ------------------- "
@@ -413,6 +417,27 @@ smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab
 imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
 
+" ----------------- mason ----------------------- "
+"  must be placed before lsp configuration
+lua << END
+  require("mason").setup()
+  require("mason-lspconfig").setup({
+     ensure_installed = { "yamlls", "helm_ls", "bashls"}
+  })
+END
+
+lua << END
+  require('lspconfig').helm_ls.setup {
+    settings = {
+      ['helm-ls'] = {
+        yamlls = {
+          path = "yaml-language-server",
+        }
+      }
+    }
+  }
+END
+
 " ---------------- yaml-ls ------------------- "
 lua << END
   require('lspconfig').yamlls.setup {
@@ -424,6 +449,7 @@ lua << END
     settings = {
       yaml = {
         schemas = {
+          kubernetes = "*.yaml",
           ["https://json.schemastore.org/kustomization.json"] = "kustomization.yaml",
           ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "docker-compose.yaml",
         },
@@ -433,107 +459,54 @@ lua << END
 END
 
 lua << END
-  local configs = require('lspconfig.configs')
-  local lspconfig = require('lspconfig')
-  local util = require('lspconfig.util')
-
-  if not configs.helm_ls then
-    configs.helm_ls = {
-      default_config = {
-        cmd = {"helm_ls", "serve"},
-        filetypes = {'helm'},
-        root_dir = function(fname)
-          return util.root_pattern('Chart.yaml')(fname)
-        end,
-      },
-    }
-  end
-
-  require('lspconfig').helm_ls.setup {
-    filetypes = {"helm"},
-    cmd = {"helm_ls", "serve"},
-  }
-END
-
-lua << END
   local cfg = require("yaml-companion").setup({
     -- Add any options here, or leave empty to use the default settings
     -- lspconfig = {
     --   cmd = {"yaml-language-server"}
     -- },
   })
-  require("lspconfig")["yamlls"].setup(cfg)
+  require("lspconfig").yamlls.setup(cfg)
 END
 
 " ---------------- pyright-ls ------------------- "
-lua << END
-  require('lspconfig').pyright.setup{}
-END
+" lua << END
+"   require('lspconfig').pyright.setup{}
+" END
 
 " ---------------- ansible-ls ------------------- "
-lua << END
-  require('lspconfig').ansiblels.setup{}
-END
+" lua << END
+"   require('lspconfig').ansiblels.setup{}
+" END
+
 
 " ---------------- Dashboard ------------------- "
-lua << END
-  local db = require('dashboard')
-  db.custom_center = {
-    {
-       icon = ' ',
-       desc = 'Find File                      ',
-       action = 'Telescope find_files',
-       shortcut = ', f f',
-    },
-    {
-       icon = ' ',
-       desc = 'Live Grep                      ',
-       action = 'Telescope live_grep',
-       shortcut = ', f g',
-    },
-    {
-       icon = ' ',
-       desc = 'Open Repo                      ',
-       action = 'Telescope repo list',
-       shortcut = ', f r',
-    },
-    {
-       icon = ' ',
-       desc = 'File Explorer                  ',
-       action = 'Telescope file_browser',
-       shortcut = ', f e',
-    },
-  }
-  db.custom_footer = {}
-  db.custom_header = {
-    \'                 ▄████████▄         ',
-    \'               ▄█▀▒▒▒▒▒▒▒▀██▄       ',
-    \'           ▄█▀▒▒▒▒▒▒▄▒▒▒▒▒▒▐█▌      ',
-    \'         ▄█▒▒▒▒▒▒▒▒▒▒▀█▒▒▒▄██       ',
-    \'       ▄█▒▒▒▒▒▒▒▒▒▒▒▒▒▒██▀▒▒▒█▄     ',
-    \'     ▄█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒█▄   ',
-    \'     ▄█▒▒▒▄██████▄▒▒▒▒▄█████▄▒▒▒▒█  ',
-    \'     █▒▒▒█▀░░░░░▀█ ▒▒▒█▀░░░░▀█▒▒▒█  ',
-    \'     █▒▒▒█░░▄░░░░▀████▀░░░▄░░█▒▒▒█  ',
-    \'   ▄███▄▒█▄░▐▀▄░░░░░░░░░▄▀▌░▄█▒▒███▄',
-    \'   █▀░░█▄▒█░▐▐▀▀▄▄▄ ▄▄▄▀▀▌▌░█▒▒█░░▀█',
-    \'   █░░░░█▒█░▐▐  ▄▄ █ ▄▄  ▌▌░█▒█░░░░█',
-    \'   █░▄░░█▒█░▐▐▄ ▀▀ █ ▀▀ ▄▌▌░█▒█░░▄░█',
-    \'   █░░█░█▒█░░▌▄█▄▄▀ ▀▄▄█▄▐░░█▒█░█░░█',
-    \'   █▄░█████████▀░░▀▄▀░░▀█████████░▄█',
-    \'   ██▀░░▄▀░░▀░░▀▄░░░▄▀░░▀░░▀▄░░▀██  ',
-    \'   ██░░░░░░░░░░░░░░░░░░░░░░░░░░░░░██',
-    \'   █░▄░░░░░░░░░░░░░░░░░░░░░░░░░░░▄░█',
-    \'   █░▀█▄░░░░░░░░░░░░░░░░░░░░░░░▄█▀░█',
-    \'   █░░█▀███████████████████████▀█░░█',
-    \'   █░░█    █   █   █   █   █    █░░█',
-    \'   █░░░▀█▄▄█▄▄▄█▄▄▄█▄▄▄█▄▄▄█▄▄█▀░░░█',
-    \'   ▀█░░▀█▄█    █   █   █   █▄█▀░░░█▀  ',
-    \'    ▀█░░░▀▀█▄▄ █   █   █▄▄█▀▀░░░░█▀  ',
-    \'     ▀█░░░░░▀▀█████████▀▀░░░░░░█▀    ',
-    \'      ▀█░░░░░░░▄░░░░░░░▄░░░░░░█▀    ',
-    \'        ▀██▄░░░▀▀▀▀▀▀▀▀▀░░░▄██▀      ',
-    \'          ▀██▄▄░░░░░░░▄▄██▀        ',
-    \'             ▀▀███████▀▀            ',
-  }
-END
+" lua << END
+"   local db = require('dashboard')
+"   db.custom_center = {
+"     {
+"        icon = ' ',
+"        desc = 'Find File                      ',
+"        action = 'Telescope find_files',
+"        shortcut = ', f f',
+"     },
+"     {
+"        icon = ' ',
+"        desc = 'Live Grep                      ',
+"        action = 'Telescope live_grep',
+"        shortcut = ', f g',
+"     },
+"     {
+"        icon = ' ',
+"        desc = 'Open Repo                      ',
+"        action = 'Telescope repo list',
+"        shortcut = ', f r',
+"     },
+"     {
+"        icon = ' ',
+"        desc = 'File Explorer                  ',
+"        action = 'Telescope file_browser',
+"        shortcut = ', f e',
+"     },
+"   }
+"   db.custom_footer = {}
+" END

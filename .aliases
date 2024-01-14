@@ -2,7 +2,6 @@
 
 if type nvim > /dev/null 2>&1; then
   alias vim='nvim'
-  alias vi='nvim'
 fi
 
 alias ..="cd .."
@@ -13,5 +12,6 @@ alias .....="cd ../../../.."
 alias kns=kubens
 alias kctx=kubectx
 alias kt=kubetail
+alias k=kubectl
 
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'

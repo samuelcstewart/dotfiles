@@ -8,20 +8,19 @@ fi
 #
 [[ $- != *i* ]] && return
 
-export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
+source ~/.zplug/init.zsh
 
 zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "plugins/vi-mode",           from:oh-my-zsh
-zplug "plugins/docker",            from:oh-my-zsh
-zplug "plugins/docker-compose",    from:oh-my-zsh
-zplug "plugins/kubectl",           from:oh-my-zsh
-zplug "mafredri/zsh-async"
+# zplug "plugins/docker",            from:oh-my-zsh
+# zplug "plugins/docker-compose",    from:oh-my-zsh
+# zplug "plugins/kubectl",           from:oh-my-zsh
+zplug "mafredri/zsh-async", from:"github", use:"async.zsh"
 zplug "romkatv/powerlevel10k",     as:theme, depth:1
 zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
+# zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting",  defer:2
-zplug "plugins/history-substring-search",   defer:2, from:oh-my-zsh
+# zplug "plugins/history-substring-search",   defer:2, from:oh-my-zsh
 zplug "johanhaleby/kubetail"
 
 # Install plugins if there are plugins that have not been installed
@@ -64,26 +63,13 @@ bindkey -M vicmd 'j' history-substring-search-down
 zmodload zsh/terminfo
 
 # bind up/down arrow keys for iterm
-bindkey "$terminfo[cuu1]" history-substring-search-up
-bindkey "$terminfo[cud1]" history-substring-search-down
+# bindkey "$terminfo[cuu1]" history-substring-search-up
+# bindkey "$terminfo[cud1]" history-substring-search-down
 
 # bind up/down arrow keys for nearly everything else
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
+# bindkey "$terminfo[kcuu1]" history-substring-search-up
+# bindkey "$terminfo[kcud1]" history-substring-search-down
 
-# Base16 Shell. Use base16_ to change colorschemes dynamically.
-# BASE16_SHELL=$HOME/dotfiles/shell/base16-shell/
-# [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-
-# Attach to an existing deattached tmux session, or start a new one
-#if [[ -z "$TMUX" ]] ;then
-  #ID="`tmux ls | grep -vm1 attached | cut -d: -f1`" # get the id of a deattached session
-  #if [[ -z "$ID" ]] ;then # if not available create a new one
-    #tmux new-session
-  #else
-    #tmux attach-session -t "$ID" # if available attach to it
-  #fi
-#fi
 # ~/.extra can be used for other settings you don’t want to commit.
 for file in ~/.{bash_prompt,aliases,functions,exports,extra}; do
   if [[ -r "$file" ]] && [[ -f "$file" ]]; then
@@ -104,7 +90,28 @@ source $HOME/.aliases
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+# export PATH="$HOME/.jenv/bin:$PATH"
+# eval "$(jenv init -)"
 
-source $HOME/.docker/init-zsh.sh || true # Added by Docker Desktop
+# lazy load completions
+kubectl () {
+  command kubectl $*
+  if [[ -z $KUBECTL_COMPLETE ]]
+  then
+    source <(command kubectl completion zsh)
+    KUBECTL_COMPLETE=1
+  fi
+}
+
+flux () {
+  command flux $*
+  if [[ -z $FLUX_COMPLETE ]]
+  then
+    source <(command flux completion zsh)
+    FLUX_COMPLETE=1
+  fi
+}
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
